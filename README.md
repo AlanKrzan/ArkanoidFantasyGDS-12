@@ -5,3 +5,6 @@ Authors:
 
 BartoszDanielak
 RobertKopczynski
+
+
+Dzień dobry próbuję coś <dodać>

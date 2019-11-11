@@ -3,5 +3,5 @@ Group 12 project 1. The ye-oldie game
 
 Authors:
 
-Bartosz Danielak
-Robert Kopczynski
+- Bartosz Danielak
+- Robert Kopczynski

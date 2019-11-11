@@ -1,5 +1,5 @@
 # g12p1
-Group 12 project 1. Arkanoid
+Group 12 project 1. Arkanoid copy
 
 Authors:
 

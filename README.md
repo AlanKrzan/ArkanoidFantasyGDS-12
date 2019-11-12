@@ -5,3 +5,4 @@ Authors:
 
 - Bartosz Danielak
 - Robert Kopczynski
+- Alan Krzan

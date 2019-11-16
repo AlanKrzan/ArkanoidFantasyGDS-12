@@ -4,3 +4,4 @@ Group 12 project 1. The ye-oldie game
 Authors:
 new line
 RobertKopczynski
+AlanKzan

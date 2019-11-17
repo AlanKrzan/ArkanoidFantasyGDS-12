@@ -1,0 +1,287 @@
+Game Concept & Design Document Template
+
+ARKANOID
+
+REMAKE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Revision: 0.0.4
+Written by: Alan Krzan, Bartosz Danielak
+
+
+
+
+
+
+
+
+
+
+Licencja 
+
+Jeśli chcesz użyć tego w jakiejś produkcji, uwzględnij adnotację, że dokument jest własnością: Alana Krzan i Bartosza Danielaka. Pracujemy, żebyś ty nie musiał. Jeśli chcesz zmodyfikować lub rozpowszechnić ten dokument, zrób to śmiało, jednakże nie sprzedawaj go.
+
+
+
+TL ; DR : Zatrzymaj tę sekcję dokumentu nienaruszoną, a wszystko będzie w porządku i nie sprzedawaj tego dokumentu.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Przegląd:
+
+1.1. Opis projektu (historia)
+1.2. Motyw / ustawienie / gatunek
+1.3. Docelowe platformy
+1.4. Rozgrywka
+1.5. Podstawowe informacje o mechanice rozgrywki:
+
+1.5.1. podstawowa mechanika rozgrywki #1
+1.5.2. podstawowa mechanika rozgrywki #2
+
+1.6. Analiza systemu punktacji:
+
+    1.6.1. analiza systemu punktacji #1
+    1.6.2. analiza systemu punktacji #2
+
+1.7. Co wyróżnia ten projekt?
+1.8. Potrzebne zasoby:
+
+1.8.1. Animacje 2D
+1.8.2. Dźwięk
+1.8.3. Kod silnika
+
+        1.9. Wpływy:
+        
+            1.9.1. Wpływ #1
+
+2.0. Harmonogram:
+
+2.0.1. Grupa
+2.0.2. Podział obowiązków
+2.0.3. Założenia projektu:
+obiekt #1 (Milestone #1)
+obiekt #2 (Milestone #2)
+
+
+PRZEGLĄD:
+
+1.1. Opis projektu (historia)
+
+    Prezentowany GDD opisuje projekt remake’u znanej gry typu “paddle & ball vs. blocks” z lat 80-tych (1986) “Arkanoid”, zaprojektowanej i wydanej po raz pierwszy przez japońskiego producenta gier komputerowych, firmę Taito. Początkowo gra była bardzo prosta, a zamiast okrągłą piłeczką musieliśmy zdobywać punkty zpixelowanym kwadracikiem. 
+
+
+
+1.2. Motyw / Ustawienia / Gatunek:
+
+Symulator akcji 
+Prosta logiczna gra zręcznościowa
+Paddle & ball vs. blocks
+Podział na poziomy trudności
+
+
+
+1.3. Docelowe platformy
+
+Docelowo gra powstała z myślą o użytkownikach linii komputerów Atari ST. Z czasem gra doczekała się także swoich odsłon na automaty do gier,  platformy osobiste  oraz konsole, m.in.: 
+
+Automaty Arcade 
+Komputery Amiga
+Sega Mega Drive
+Commodore 64
+Mikrokomputery ZX Spectrum
+Super Nintendo Entertainment System (SNES) 
+Macintosh
+
+1.4. Rozgrywka
+
+Celem gry jest zniszczenie wszystkich cegieł / klocków, które znajdują się nad naszym statkiem / kładką, strzelając do nich bansującą piłką. Za zbijane bloczki przyznawane są punkty. Całość została osadzona wewnątrz pionowego prostokąta otwartego z jednej strony. Jeśli piłka przekroczy obronę gracza, tj. pole kładki i wydostanie się poza prostokąt, tracimy szansę. 
+Niektóre z cegieł zawierają ulepszenia, jakie pomogą nam niszczyć pozostałe cegły. Dodatkowo w grze pojawią się przeciwnicy oraz przeszkody, które możemy zniszczyć odbijając od nich piłeczkę. Jeżeli ich nie trafimy, znikają oni gdzieś pod mapą. W grze posiadamy trzy szanse na rozbicie wszystkich cegieł. Utrata wszystkich sans równa się z końcem gry oraz podliczeniem punktów, po czym będziemy mogli zacząć rozgrywkę od nowa. 
+
+Interfejs gry składa się z:
+
+Intro: zawiera informacje o wydawcy oraz wersji gry
+Menu: wybieramy poziom trudności gry spośród: EASY / HARD / IMPOSSIBLE
+Score: zawiera informacje dotyczące liczby punktów zdobytych podczas właściwej rozgrywki
+High Score: zawiera informacje dotyczące największej osiągniętej liczby punktów podczas wszystkich rozgrywek jakie miały miejsce 
+Stage / Level: informuje nas na którym poziomie podczas rozgrywki znajdujemy się obecnie
+
+Urozmaicenia / Dodatki:
+
+Tryb dla dwóch graczy: tryb współpracy, w którym obaj gracze muszą sobie pomagać, by razem zniszczyć wszystkie cegły. Drugi gracz powyżej (mniejszy i szybszy) jest w stanie dotrzeć do najdalszych punktów poziomu, znajduje się jednak bliżej cegieł przez co wymagany jest od niego większy refleks.  Zawodnik na dole (większy i powolny: regularna kładka) uderza piłkę bez większych trudności ze względu na dużą powierzchnię kładki. Przejście przez poziom może jednak  zająć trochę czasu. 
+
+
+1.5 Podstawowe informacje o mechanice rozgrywki
+
+1.5.1. podstawowa mechanika rozgrywki #1
+
+Wypuszczenie piłeczki: rozgrywka rozpoczyna się od wypuszczenia piłeczki w pole prostokąta w celu niszczenia przeszkód, co uruchamia reakcję łańcuchową. Piłeczkę wypuszczamy w pole za pomocą kontrolerów (space / LMB)
+Uruchomienie platformy: platformę osadzoną na wektorze horyzontalnie wprawiamy w ruch w następnej kolejności po wypuszczeniu piłeczki za pomocą kontrolera (LMB)
+Sterowanie: opiera się na poruszaniu platformą w prawo lub w lewo za pomocą kontrolerów (A / D lub strzałek kierunku < / >) 
+Strzał: strzał możemy odblokować po rozbiciu czerwonego bloczka. Pozwala on na wypuszczenie wiązki lub dodatkowej piłeczki poruszającej się po wektorze wertykalnym przez naciśnięcie kontrolera (space / LMB)
+
+1.5.2. podstawowa mechanika rozgrywki #2
+
+Gracz: porusza platformą osadzoną na wektorze horyzontalnie oraz próbuje uderzyć piłeczkę.
+Poziomy: próbujemy osiągnąć jak najwyższy poziom. Pierwsze wersje “Arkanoid” posiadały poziomy w zakresie do +30. Wersje odświeżone ograniczają się często do +10 poziomów możliwych do odblokowania w trakcie rozgrywki.  
+Szanse: na początku gry zaczynamy posiadając 3 szanse, aczkolwiek w trakcie rozgrywki możemy zdobywać dodatkowe “życia” bez limitu.
+Power up’y: ogólnie dostępnych w grze jest 7 ulepszeń [łączniki / kumulatory] ukrytych pod bloczkami, z czego każde zapewnia graczowi określone bonusy, m.in.: 
+
+Ciemnoniebieski bloczek: pozwala na rozszerzenie zasięgu pola kładki, od której możemy odbijać piłeczki 
+Czerwony bloczek: odbija piłeczkę lub pozwala na zdobycie dodatkowego strzału
+Zielony bloczek: zatrzymuje piłeczkę na moment lub generuje spadający bloczek z dodatkową ilością punktów 
+Jasnoniebieski bloczek: pozwala na zwiększenie ilości piłeczek do trzech 
+Szary bloczek: generuje spadający bloczek zawierający dodatkową szansę 
+Różowy bloczek: pozwala na osiągnięcie następnego poziomu 
+Pomarańczowy bloczek: spowalnia prędkość piłeczki
+Srebrny bloczek: potrzebuje trzech uderzeń by zostać zniszczonym. Pozwala na zdobycie wielokrotności do 50 punktów x poziom na którym się znajdujemy
+Złoty bloczek: odbija piłeczkę ale jest niezniszczalny. Nie zdobywamy dodatkowych punktów za uderzenie
+
+Przeciwnicy i przeszkody: dodatkowi przeciwnicy oraz przeszkody będą generowane po zniszczeniu cegiełki konkretnego koloru i ulegają zniszczeniu po trafieniu ich piłeczką. Dodatkowe przeszkody poruszają się opadając powoli w stronę kładki. W przypadku gdy nie zbierzemy bonusu dotykając go kładka, znika on pod ekranem za statkiem gracza. Dostępna liczba dodatkowych przeszkód i przeciwników to 3, które mogą pojawić się w tym samym czasie. 
+Przeciwnicy pojawiający się cyklicznie co 4 poziomy to: 
+Statki
+Cylindry (trójkąty)
+Molekuły (składają się z kilku ulegających zniszczeniu elementów
+Kwadraty / Sfery
+
+
+1.6. Analiza systemu punktacji
+
+1.6.1. analiza systemu punktacji #1
+
+Kryterium trudności: Pierwsze kryterium, na podstawie którego zdobywamy punkty to poziom trudności. 
+
+Easy: wartość podstawowa pkt. według koloru każdego bloczka
+Hard: 3 x wartości podstawowej według koloru bloczka
+Impossible: 5x wartości podstawowej według koloru bloczka
+1.6.2. analiza systemu punktacji #2
+
+Podstawowa punktacja: za rozbicie konkretnego koloru bloczków otrzymujemy konkretną liczbę punktów: 
+
+Biały bloczek: 50 pkt.
+Pomarańczowy bloczek: 60 pkt.
+Jasnoniebieski bloczek: 70 pkt. 
+Zielony bloczek: 80 pkt.
+Czerwony bloczek: 90 pkt.
+Ciemnoniebieski bloczek: 100 pkt.
+Różowy bloczek: 110 pkt.
+Żółty bloczek: 120 pkt.
+Srebrny bloczek: 50 x Level No.
+
+Bonusy punktowe: każdy z bonusów dodaje +100 pkt. do ogólnej puli.
+Wariacje punktowe: możemy także zdobywać dodatkowe punkty oraz łączyć bonusy dzięki zniszczeniu bloczków o kilku kolorach jednocześnie
+
+1.7. Co wyróżnia ten projekt?
+
+    Projekt prezentowany przez naszą grupę to klasyczny retro-remake gry z lat 80-tych. Ciekawym z założenia wydaje się być plan realizacji projektu w zupełnie nowej szacie graficznej, jako paddle & ball vs. blocks osadzone w motywie z “zombie apocalypse”, gdzie zamiast statku / kładki poruszamy ludzikiem trzymającym tackę / teczkę, a zamiast odbijającej się od nas piłeczki będziemy strzelać w zombiaki bansującą kulą ognia. 
+    Innym pomysłem jest poukładanie bloczków w nietypowe konstrukcje, przez co rozgrywka może być łatwiejsza / trudniejsza, w zależności od układu figur na mapie.
+
+
+
+
+1.8. Potrzebne zasoby:
+
+1.8.1. Animacje 2D
+
+Szkic I.I. Zombie Apocalypse
+
+
+
+Szkic I.II. Retro Look
+
+
+1.8.2. Dźwięk
+
+1.8.3. Kod silnika
+
+
+
+1.9. Wpływy:
+        
+        1.9.1. wpływ #1
+            
+- Gry w stylu “Breakout” wypuszczone na platformę Atari pod koniec lat 70-tych (1976 r.) 
+- Gry typu smash / paddle & ball vs. blocks na komputery osobiste, automaty i konsole do gier wideo wyprodukowane pod koniec lat 80-tych.
+- Wszystkie gry zręcznościowe typu smash / paddle & ball vs. blocks będące następcami “Arkanoida”
+
+
+
+2.0. Harmonogram: 
+
+2.0.1. Grupa 
+
+Danielak Bartosz
+Kopczyński Robert
+Krzan Alan 
+Strzelecka Ewa 
+
+2.0.2. Podział obowiązków 
+
+Ewa Strzelecka - Grafik
+
+Główne obowiązki to wymyślenie głównego pomysłu na rozwiązania graficzne, styl w jakim chcemy utrzymać remake gry którą robimy, stworzenie Art Design Document - (ADD) oraz wykonanie assetów związanych z projektem.
+
+Robert Kopczyński - Programista 
+
+Główne obowiązki to założenie repozytorium i wprowadzenie zespołu w sposób jego używania oraz w późniejszej części kodowanie i programowanie podczas trwania projektu.
+
+
+Alan Krzan - Designer/Producent 
+
+Główne obowiązki to zrobienie Game Design Document - (GDD) oraz czuwanie nad designem gry. Jako, iż jest głównym designerem większość ostatecznych kreatywnych decyzji będzie należała do niego. Wyraził również chęć pomagania w obowiązkach producenckich więc większość raportów będzie współtworzył wraz z producentem.
+
+Bartosz Danielak - Producent/Designer
+
+Główne obowiązki to czuwanie nad poprawną komunikacją, przejrzyste taskowanie dla całego zespołu, organizacja pracy i rozwiązywanie problemów oraz trzymanie deadline’ów. Jako dodatkowy obowiązek będzie czuwał nad designem i pomagał Alanowi w GDD i innych zagadnieniach związanych z Designem.  
+
+2.0.3. Założenia projektu:
+
+obiekt #1 (Milestone #1) - 13/11/2019r.
+
+Lista zadań, które udało się wykonać do tej pory:
+
+Stworzenie sprawnego kanału komunikacyjnego - Slack
+Stworzenie przejrzystego systemu tasków, deadline’ów i planu, który planujemy wykonać przez okres trwania projektu - Trello
+Założenie repozytorium - GitHub
+Zainstalowanie i wstępne zapoznanie się z silnikiem - Godot
+Wstępne wyjaśnienie zespołowi jak korzysta się z repozytorium
+Wstępne rozdzielenie pracy i ustanowienie pierwszych deadline’ów
+Wyznaczenie, kto za co jest odpowiedzialny i na czym powinien się skupić
+Grafika: powstały pierwsze projekty graficzne naszej wersji Arkanoida
+
+obiekt #2 (Milestone #2)
+
+
+
+

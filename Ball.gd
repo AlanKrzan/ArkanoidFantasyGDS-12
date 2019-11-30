@@ -1,25 +1,14 @@
 extends KinematicBody2D
 
-#const BALL_SPEED = 600
-export var speed = 400
-var on=true
-#onready var initial_pos = self.position
 
+export var speed = 300
+var on=true
 var velocity = Vector2()
 
 #ustawienie początkowej pozycji oraz vector prędokości
 func start(pos,vel=Vector2(speed, -speed)):
     position = pos
     velocity = vel
-
-#funkcja obsługująca ruch oraz wywołująca efekt zderzenia jeśli taki występuje
-func _physics_process(delta):
-    if on:
-        var collision = move_and_collide(velocity * delta)
-        if collision:
-            velocity = velocity.bounce(collision.normal)
-            if collision.collider.has_method("hit"):
-                collision.collider.hit()
 
 func stop_movement():
     on=false
@@ -28,8 +17,17 @@ func stop_movement():
 func die():
     queue_free()
     
-#coś co nie działa?
+#funkcja obsługująca ruch oraz wywołująca efekt zderzenia jeśli taki występuje
+func _physics_process(delta):
+    if on:
+        var collision = move_and_collide(velocity * delta)
+        if collision:
+            if collision.collider.has_method("hit"):
+                collision.collider.hit()
+                velocity*=1.05
+            var motion = collision.remainder.bounce(collision.normal)
+            velocity = velocity.bounce(collision.normal)
+            collision=move_and_collide(motion)
+
 func _on_VisibilityNotifier2D_screen_exited():
-    print("sayonara")
     queue_free()
-    

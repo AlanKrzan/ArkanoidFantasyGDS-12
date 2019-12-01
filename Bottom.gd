@@ -8,7 +8,5 @@ func _on_Bottom_body_entered(body):
     if body.has_method("die"):
         body.die()
 
-
-
 func _on_Bottom_area_entered(area):
     area.queue_free()

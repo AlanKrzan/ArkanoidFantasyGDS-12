@@ -5,6 +5,7 @@ var velocity=Vector2(0,50)
 var on=true
 export var score=50
 signal points(score,is_ball)
+signal release
 
 func start(pos,vel=Vector2(0,50)):
     position = pos
@@ -18,12 +19,17 @@ func die():
     
 func restart_movement():
     on=true
-    
+
+func hit():
+    emit_signal("points",_get_score(),false)
+    emit_signal("release")
+    queue_free()
+
 func _get_score():
     return score
     
 func _on_VisibilityNotifier2D_screen_exited():
-    print("escape?")
+    emit_signal("release")
     queue_free()
     
 func _physics_process(delta):

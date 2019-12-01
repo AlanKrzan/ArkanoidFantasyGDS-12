@@ -3,6 +3,7 @@
 [ext_resource path="res://BasePowerUp.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 10 )
 
 [node name="BasePowerUp" type="Area2D"]
 collision_layer = 2
@@ -16,9 +17,9 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -10.0
+margin_left = -20.0
 margin_top = -10.0
-margin_right = 10.0
+margin_right = 20.0
 margin_bottom = 10.0
 color = Color( 0, 0, 0, 1 )
 

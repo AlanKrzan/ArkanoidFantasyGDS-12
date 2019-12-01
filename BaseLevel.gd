@@ -26,6 +26,7 @@ func new_game():
     get_parent().add_child(c)
     emit_signal("move")
     $Hud.hide_message()
+    $SpeedUpTimer.start()
 
 #ustawienie elementów gry do rozgrywki
 func _ready():
@@ -57,6 +58,7 @@ func _spawn_enemy():
         e.start(($Top/SpawnPosition.get_global_transform_with_canvas().get_origin()))
         self.connect("stop",e,"stop_movement")
         self.connect("move",e,"restart_movement")
+        e.connect("release",self,"_enable_enemy")
         e.connect("points",self,"_get_points")
         get_parent().add_child(e)
 
@@ -77,15 +79,19 @@ func _get_points(points,is_block):
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
+    $EscapeTimer.start()
     
 #funkcja przegrania gry
 func _game_over():
     $Hud.show_message("GAME OVER")
+    $EscapeTimer.start()
 
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
 func _process(delta):
     if Input.is_action_pressed("ui_select") and !started:
         new_game()
+    if Input.is_action_just_pressed("ui_cancel"):
+        get_tree().change_scene("res://MainMenu.tscn")
                 
 #funkcja ucieczki piłki, sprawdzanie warunku porażki
 func _on_Bottom_redo():
@@ -100,8 +106,14 @@ func _on_Bottom_redo():
         started=false
     else:
         _game_over()
+        
+func _enable_enemy():
+    spawn_permission=true
+
 #funkcja zwracająca próbkę n elementów z listy
 func __rand_sample(n,list):
+    if list==[]:
+        return []
     var sample = []
     for i in range(n):
         var x = randi()%list.size()
@@ -109,3 +121,11 @@ func __rand_sample(n,list):
         list.remove(x)
     return sample
 
+func _on_SpeedUpTimer_timeout():
+    var balls = get_tree().get_nodes_in_group("Ball")
+    for ball in balls:
+        ball.accelerate(0.02)
+
+
+func _on_EscapeTimer_timeout():
+    get_tree().change_scene("res://MainMenu.tscn")

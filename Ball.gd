@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-export var speed = 300
+export var speed = 200
 var on=true
 var velocity = Vector2()
 
@@ -9,6 +9,9 @@ var velocity = Vector2()
 func start(pos,vel=Vector2(speed, -speed)):
     position = pos
     velocity = vel
+
+func accelerate(a):
+    velocity*=1+a
 
 func stop_movement():
     on=false
@@ -24,7 +27,6 @@ func _physics_process(delta):
         if collision:
             if collision.collider.has_method("hit"):
                 collision.collider.hit()
-                velocity*=1.05
             var motion = collision.remainder.bounce(collision.normal)
             velocity = velocity.bounce(collision.normal)
             collision=move_and_collide(motion)

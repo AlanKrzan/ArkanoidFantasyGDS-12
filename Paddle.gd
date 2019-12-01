@@ -9,6 +9,7 @@ var screen_size # Size of the game window.
 onready var initial_pos = self.position
 var speed = paddle_speed
 var upgrade = 0
+export var power_up_width_scale=2
 
 func start(pos):
     position = pos
@@ -26,9 +27,9 @@ func power_up(value):
         upgrade=1
         var shape = $CollisionShape2D.get_shape()
         var oldScale = shape.get_extents()
-        shape.set_extents(Vector2(paddle_width*2,oldScale.y))
-        $Sprite.scale=Vector2(2,0.17)
-        l_margin=margin*2
+        shape.set_extents(Vector2(paddle_width*power_up_width_scale,oldScale.y))
+        $Sprite.scale=Vector2(power_up_width_scale,0.17)
+        l_margin=margin*power_up_width_scale
         r_margin=screen_size.x-l_margin
 
 func _reset_power():

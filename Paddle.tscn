@@ -4,11 +4,12 @@
 [ext_resource path="res://art/icon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 35, 6 )
+extents = Vector2( 60, 6 )
 
 [node name="Paddle" type="KinematicBody2D" groups=[
 "Paddle",
 ]]
+position = Vector2( 0.122086, 0 )
 collision_mask = 31
 script = ExtResource( 1 )
 __meta__ = {
@@ -17,7 +18,8 @@ __meta__ = {
 margin = 35
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1, 0.17 )
+position = Vector2( 0, 30 )
+scale = Vector2( 1.6, 1 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true

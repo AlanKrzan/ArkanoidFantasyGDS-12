@@ -3,7 +3,7 @@
 [ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 540 )
+extents = Vector2( 22.5, 540 )
 
 [node name="Edge" type="StaticBody2D"]
 collision_layer = 3

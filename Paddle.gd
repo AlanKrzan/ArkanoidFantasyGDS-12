@@ -4,12 +4,14 @@ export var margin=10
 var l_margin
 var r_margin
 export var paddle_speed = 500  # How fast the player will move (pixels/sec).
-export var paddle_width = 35
+export var paddle_width = 30
 var screen_size # Size of the game window.
 onready var initial_pos = self.position
 var speed = paddle_speed
 var upgrade = 0
 export var power_up_width_scale=2
+var on=false
+var angles=[-40,-25,-10,10,25,40]
 
 func start(pos):
     position = pos
@@ -28,35 +30,79 @@ func power_up(value):
         var shape = $CollisionShape2D.get_shape()
         var oldScale = shape.get_extents()
         shape.set_extents(Vector2(paddle_width*power_up_width_scale,oldScale.y))
-        $Sprite.scale=Vector2(power_up_width_scale,0.17)
+        $Sprite.scale=Vector2(power_up_width_scale,1)
         l_margin=margin*power_up_width_scale
         r_margin=screen_size.x-l_margin
 
+func __motion(velocity,collision,normal):
+    var motion = collision.remainder.bounce(normal)
+    velocity = velocity.bounce(normal)
+    return [motion,velocity]
+
+func angle(ball_position_x,velocity,collision):
+    var width
+    if upgrade==1:
+        width=paddle_width*2
+    else:
+        width=paddle_width
+    var distance
+    if position.x > ball_position_x:
+        distance = position.x - ball_position_x
+        if distance > width/3:
+             if distance > width*2/3:
+                collision=__motion(velocity,collision,angles[0])
+             else:
+                collision=__motion(velocity,collision,angles[1])
+        else:
+            collision=__motion(velocity,collision,angles[2])
+    elif position.x < ball_position_x:
+        distance = ball_position_x - position.x
+        if distance > width/3:
+             if distance > width*2/3:
+                collision=__motion(velocity,collision,angles[5])
+             else:
+                collision=__motion(velocity,collision,angles[4])
+        else:
+            collision=__motion(velocity,collision,angles[3])
+    else:
+        collision=__motion(velocity,collision,collision.normal)
+    return collision
+
 func _reset_power():
-    print("reseting")
     upgrade=0
     var shape = $CollisionShape2D.get_shape()
     var oldScale = shape.get_extents()
     shape.set_extents(Vector2(paddle_width,oldScale.y))
-    $Sprite.scale=Vector2(1,0.17)
+    $Sprite.scale=Vector2(1,1)
     l_margin=margin
     screen_size = get_viewport_rect().size
     r_margin=screen_size.x-margin
     
 func _ready():
     _reset_power()
+    var north = Vector2(0,-1)
+    for i in range(angles.size()):
+        angles[i]=north.rotated(deg2rad(angles[i]))
+    print(angles)
     screen_size = get_viewport_rect().size
     l_margin = margin
     r_margin =  screen_size.x - margin
     hide()
+    
+func _start_movement():
+    on=true
+    
+func _stop_movement():
+    on=false
 
 func _process(delta):
-    var velocity = Vector2()  # The player's movement vector.
-    if Input.is_action_pressed("ui_right"):
-        velocity.x += 1
-    if Input.is_action_pressed("ui_left"):
-        velocity.x -= 1
-    if velocity.length() > 0:
-        velocity = velocity.normalized() * speed
-    position += velocity * delta
-    position.x = clamp(position.x, l_margin, r_margin)
+    if on:
+        var velocity = Vector2()  # The player's movement vector.
+        if Input.is_action_pressed("ui_right"):
+            velocity.x += 1
+        if Input.is_action_pressed("ui_left"):
+            velocity.x -= 1
+        if velocity.length() > 0:
+            velocity = velocity.normalized() * speed
+        position += velocity * delta
+        position.x = clamp(position.x, l_margin, r_margin)

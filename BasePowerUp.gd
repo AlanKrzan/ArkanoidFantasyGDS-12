@@ -1,4 +1,6 @@
 extends Area2D
+#warning-ignore-all:unused_variable
+#warning-ignore-all:return_value_discarded
 
 export var speed=200
 var velocity=Vector2(0,speed)

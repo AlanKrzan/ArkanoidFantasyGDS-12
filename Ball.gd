@@ -28,6 +28,8 @@ func _physics_process(delta):
             if collision.collider.has_method("hit"):
                 collision.collider.hit()
             var motion = collision.remainder.bounce(collision.normal)
+            if collision.collider.has_method("power_up"):
+                print(collision.get_normal())
             velocity = velocity.bounce(collision.normal)
             collision=move_and_collide(motion)
 

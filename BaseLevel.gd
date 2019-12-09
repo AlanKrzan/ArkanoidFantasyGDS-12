@@ -1,8 +1,8 @@
 extends Node2D
-
+#warning-ignore-all:unused_variable
+#warning-ignore-all:return_value_discarded
 
 var Ball = preload("res://Ball.tscn")   #wczytywanie schematu piłki
-var Block = preload("res://Block.tscn") #wczytywanie schematu bloczka
 var Enemy = preload("res://BaseEnemy.tscn")
 var Basic = preload("res://BasePowerUp.tscn")
 var score=0                             #inicjalizacja wyniki
@@ -13,8 +13,10 @@ var spawn_trigger_value
 var spawn_permission=true
 export var upgrade_count=5
 export var basic_powerup_count=5
+export var level=1
 signal stop
 signal move
+signal purge
 
 #funkcja rozpoczęcia rozgrywki
 func new_game():
@@ -23,6 +25,7 @@ func new_game():
     c.start(($Paddle.position+Vector2(0,-30)))
     $Paddle/BallDummy.hide()
     self.connect("stop",c,"stop_movement")
+    self.connect("purge",c,"die")
     get_parent().add_child(c)
     emit_signal("move")
     $Hud.hide_message()
@@ -35,12 +38,20 @@ func _ready():
     var blocks = get_tree().get_nodes_in_group("Block")
     blocks_left = blocks.size()
     spawn_trigger_value = blocks_left*0.75
+    self.connect("stop",$Paddle,"_stop_movement")
+    self.connect("move",$Paddle,"_start_movement")
     for block in blocks:
-        block.set_level(1)
+        if block.has_method("set_level"):
+            block.set_level(level)
         block.connect("points",self,"_get_points")
-    var sample=__rand_sample(upgrade_count,blocks)
+        self.connect("purge",block,"death")
+    var sample
+    if upgrade_count < blocks.size():
+        #print(upgrade_count," ",blocks.size())
+        sample=__rand_sample(upgrade_count,blocks)
+    else:
+        sample=__rand_sample(blocks.size(),blocks)
     var powerup_list=_powerup_list()
-    
     for i in range(sample.size()):
         sample[i].set_power(powerup_list[i])
     $Hud.show_message("Press SPACE to start")
@@ -50,6 +61,11 @@ func _powerup_list():
     for i in range(basic_powerup_count):
         list.append(Basic)
     return list
+
+func _spawn_check():
+    if spawn_permission and spawn_trigger_value > blocks_left:
+        $Top/AnimatedSprite.play("")
+        
 
 func _spawn_enemy():
     if spawn_permission and spawn_trigger_value > blocks_left:
@@ -68,12 +84,15 @@ func _get_points(points,is_block):
     $Hud.update_score(score)
     if is_block:
         blocks_left -= 1
-        print(get_tree().get_nodes_in_group("Block").size())
+        if blocks_left==1:
+            var blocks = get_tree().get_nodes_in_group("Block")
+            for block in blocks:
+                block.set_power(null)
         if blocks_left <= 0:
             _win()
             started=false
             return
-    _spawn_enemy()
+    _spawn_check()
     
 #funckja zwycięstwa?
 func _win():
@@ -83,14 +102,17 @@ func _win():
     
 #funkcja przegrania gry
 func _game_over():
+    emit_signal("stop")
     $Hud.show_message("GAME OVER")
     $EscapeTimer.start()
-
+    
+#warning-ignore:unused_argument
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
 func _process(delta):
     if Input.is_action_pressed("ui_select") and !started:
         new_game()
     if Input.is_action_just_pressed("ui_cancel"):
+        emit_signal("purge")
         get_tree().change_scene("res://MainMenu.tscn")
                 
 #funkcja ucieczki piłki, sprawdzanie warunku porażki
@@ -129,3 +151,8 @@ func _on_SpeedUpTimer_timeout():
 
 func _on_EscapeTimer_timeout():
     get_tree().change_scene("res://MainMenu.tscn")
+
+
+func _on_AnimatedSprite_animation_finished():
+    _spawn_enemy()
+    $Top/AnimatedSprite.stop()

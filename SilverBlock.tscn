@@ -7,14 +7,11 @@
 
 [node name="SilverBlock" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-score = 5
 
-[node name="Sprite" parent="." index="1"]
-visible = true
+[node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
 
 [node name="ColorRect" parent="." index="2"]
-visible = false
 color = Color( 0.752941, 0.752941, 0.752941, 1 )
 
 [node name="Sprite2" type="Sprite" parent="." index="3"]

@@ -13,6 +13,7 @@ func death():
 func hit():
     if lives>0:
         lives-=1
+        $Sprite2.hide()
     else:
         emit_signal("points",_get_score(),true)
         if power_up != null:

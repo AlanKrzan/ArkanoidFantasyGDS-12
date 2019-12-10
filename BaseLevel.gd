@@ -9,12 +9,12 @@ var score=0                             #inicjalizacja wyniki
 var started=false                       #czy rozgrywka się zaczeła?, używana w logice gry
 var life=3                              #inicjalizacja ilości żyć
 var blocks_left=0                       #licznik bloczków
-var spawn_trigger_value
-var spawn_permission=true
-export var upgrade_count=5
-export var basic_powerup_count=5
-export var level=1
-signal stop
+var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
+var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
+export var upgrade_count=5              #ilosc ulepszen ogółem
+export var basic_powerup_count=5        #ilosc ulepszen podstawowych(tutaj poszerza kijek)
+export var level=1                      #obecny poziom gry
+signal stop                             #sygnały wysyłane do reszty kodu
 signal move
 signal purge
 
@@ -56,19 +56,20 @@ func _ready():
         sample[i].set_power(powerup_list[i])
     $Hud.show_message("Press SPACE to start")
 
+#funkcja zwracająca liste ulepszen, TODO: rozszerzyć o więcej ulepszeń
 func _powerup_list():
     var list=[]
     for i in range(basic_powerup_count):
         list.append(Basic)
     return list
 
+#sprawdzanie czy można wywołąć przeciwnika dla animacji
 func _spawn_check():
-    if spawn_permission and spawn_trigger_value > blocks_left:
-        $Top/AnimatedSprite.play("")
+    return spawn_permission and spawn_trigger_value > blocks_left
         
-
+# wywołanie przeciwnika, jeśli 
 func _spawn_enemy():
-    if spawn_permission and spawn_trigger_value > blocks_left:
+    if _spawn_check():
         spawn_permission=false
         var e = Enemy.instance()
         e.start(($Top/SpawnPosition.get_global_transform_with_canvas().get_origin()))
@@ -92,15 +93,16 @@ func _get_points(points,is_block):
             _win()
             started=false
             return
-    _spawn_check()
+    if _spawn_check():
+        $Top/AnimatedSprite.play("")
     
-#funckja zwycięstwa?
+#funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
     $EscapeTimer.start()
     
-#funkcja przegrania gry
+#funkcja przegrania gry, powrót do menu po czasie
 func _game_over():
     emit_signal("stop")
     $Hud.show_message("GAME OVER")
@@ -129,6 +131,7 @@ func _on_Bottom_redo():
     else:
         _game_over()
         
+#funkcja umożliwiająca wywołanie przeciwnika, potrzebna dla jednego sygnału
 func _enable_enemy():
     spawn_permission=true
 
@@ -143,16 +146,17 @@ func __rand_sample(n,list):
         list.remove(x)
     return sample
 
+#funkcja podnosząca prędkość piłki, co SpeedUpTimer
 func _on_SpeedUpTimer_timeout():
     var balls = get_tree().get_nodes_in_group("Ball")
     for ball in balls:
         ball.accelerate(0.02)
 
-
+#funkcja powracająca do Menu po upływie czasu
 func _on_EscapeTimer_timeout():
     get_tree().change_scene("res://MainMenu.tscn")
 
-
+#funkcja wywołująca przeciwnika po animacji otwierania
 func _on_AnimatedSprite_animation_finished():
     _spawn_enemy()
     $Top/AnimatedSprite.stop()

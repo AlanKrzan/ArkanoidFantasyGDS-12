@@ -13,14 +13,16 @@ export var power_up_width_scale=2
 var on=false
 var angles=[-40,-25,-10,10,25,40]
 
+#ustawienie kijka na pozycji początkowej, i wyświetlenie go
 func start(pos):
     position = pos
     show()
-
+#powrót na pozycję początkową i reset ulepszeń do zera
 func reset():
     position = initial_pos
     _reset_power()
-
+    
+#funckaj przyznająca ulepszenia, TODO: dodać więcej
 func power_up(value):
     if upgrade != 0:
         _reset_power()
@@ -34,11 +36,13 @@ func power_up(value):
         l_margin=margin*power_up_width_scale
         r_margin=screen_size.x-l_margin
 
+#funkcja obsługi ruchu?, powstała bo coś kombinowałem i nie chciałem powtarzać ten sam kod
 func __motion(velocity,collision,normal):
     var motion = collision.remainder.bounce(normal)
     velocity = velocity.bounce(normal)
     return [motion,velocity]
 
+#funckja obliczająca alternatywny vector normalny odbicia, w zależności od pozycji, daje dziwne efekty dla kąta >45 od północy
 func angle(ball_position_x,velocity,collision):
     var width
     if upgrade==1:
@@ -68,6 +72,7 @@ func angle(ball_position_x,velocity,collision):
         collision=__motion(velocity,collision,collision.normal)
     return collision
 
+#funkcja resetująca ulepszenia TODO: cofnąć inne ulepszenia jeśli coś zmieniają, jak powstaną
 func _reset_power():
     upgrade=0
     var shape = $CollisionShape2D.get_shape()
@@ -78,6 +83,7 @@ func _reset_power():
     screen_size = get_viewport_rect().size
     r_margin=screen_size.x-margin
     
+#funkcja przygotująca kijek do rozgrywki
 func _ready():
     _reset_power()
     var north = Vector2(0,-1)
@@ -89,12 +95,15 @@ func _ready():
     r_margin =  screen_size.x - margin
     hide()
     
+# funkcja dla sygnału rozpoczynającego grę
 func _start_movement():
     on=true
     
+# funkcja dla sygnału zatrzymującego grę
 func _stop_movement():
     on=false
 
+# obsluga poruszania się
 func _process(delta):
     if on:
         var velocity = Vector2()  # The player's movement vector.

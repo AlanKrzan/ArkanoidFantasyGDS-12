@@ -11,6 +11,7 @@ extents = Vector2( 6.51265, 6.56766 )
 ]]
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
+speed = 300
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )

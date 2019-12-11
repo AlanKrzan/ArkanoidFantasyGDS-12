@@ -1,10 +1,11 @@
 extends KinematicBody2D
 
-export var margin=10
+export var margin=20
+export var edge_size=45
 var l_margin
 var r_margin
 export var paddle_speed = 500  # How fast the player will move (pixels/sec).
-export var paddle_width = 30
+export var paddle_width = 60
 var screen_size # Size of the game window.
 onready var initial_pos = self.position
 var speed = paddle_speed
@@ -33,7 +34,7 @@ func power_up(value):
         var oldScale = shape.get_extents()
         shape.set_extents(Vector2(paddle_width*power_up_width_scale,oldScale.y))
         $Sprite.scale=Vector2(power_up_width_scale,1)
-        l_margin=margin*power_up_width_scale
+        l_margin=margin*power_up_width_scale+edge_size
         r_margin=screen_size.x-l_margin
 
 #funkcja obsługi ruchu?, powstała bo coś kombinowałem i nie chciałem powtarzać ten sam kod
@@ -79,9 +80,9 @@ func _reset_power():
     var oldScale = shape.get_extents()
     shape.set_extents(Vector2(paddle_width,oldScale.y))
     $Sprite.scale=Vector2(1,1)
-    l_margin=margin
+    l_margin=margin+edge_size
     screen_size = get_viewport_rect().size
-    r_margin=screen_size.x-margin
+    r_margin=screen_size.x-l_margin
     
 #funkcja przygotująca kijek do rozgrywki
 func _ready():
@@ -91,8 +92,8 @@ func _ready():
         angles[i]=north.rotated(deg2rad(angles[i]))
     print(angles)
     screen_size = get_viewport_rect().size
-    l_margin = margin
-    r_margin =  screen_size.x - margin
+    l_margin = margin +edge_size
+    r_margin =  screen_size.x - l_margin
     hide()
     
 # funkcja dla sygnału rozpoczynającego grę

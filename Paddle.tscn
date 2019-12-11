@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Paddle.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Paddle.gd" type="Script" id=1]
 [ext_resource path="res://art/icon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 60, 6 )
+extents = Vector2( 60, 1 )
 
 [node name="Paddle" type="KinematicBody2D" groups=[
 "Paddle",
@@ -15,11 +15,12 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-margin = 35
+margin = 30
+paddle_width = 30
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 30 )
-scale = Vector2( 1.6, 1 )
+scale = Vector2( 2, 1 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://BaseLevel.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/BaseLevel.gd" type="Script" id=1]
 [ext_resource path="res://Paddle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://art/sixthsense.png" type="Texture" id=3]
 [ext_resource path="res://Edge.tscn" type="PackedScene" id=4]
@@ -8,7 +8,7 @@
 [ext_resource path="res://art/gate0.png" type="Texture" id=6]
 [ext_resource path="res://art/gate1.png" type="Texture" id=7]
 [ext_resource path="res://art/gate2.png" type="Texture" id=8]
-[ext_resource path="res://Bottom.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Bottom.gd" type="Script" id=9]
 [ext_resource path="res://Hud.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -23,37 +23,38 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 360, 10 )
+extents = Vector2( 360, 40 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="StartPosition" type="Position2D" parent="."]
-position = Vector2( 400, 888 )
+position = Vector2( 400, 996 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="Paddle" parent="." instance=ExtResource( 2 )]
-margin = 32
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 3 )
 
-[node name="StartTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Left" parent="." instance=ExtResource( 4 )]
 position = Vector2( 22, 540 )
 
 [node name="Right" parent="." instance=ExtResource( 4 )]
-position = Vector2( 787.5, 540 )
+position = Vector2( 788, 540 )
 
 [node name="Top" type="StaticBody2D" parent="."]
 position = Vector2( 405, 22 )
 physics_material_override = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
 shape = SubResource( 1 )
@@ -67,17 +68,21 @@ frames = SubResource( 2 )
 animation = "open"
 
 [node name="Bottom" type="Area2D" parent="."]
-position = Vector2( 405, 1060 )
+position = Vector2( 405, 1040 )
 collision_mask = 31
 script = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
 shape = SubResource( 3 )
 
 [node name="Hud" parent="." instance=ExtResource( 10 )]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="SpeedUpTimer" type="Timer" parent="."]
 wait_time = 5.0

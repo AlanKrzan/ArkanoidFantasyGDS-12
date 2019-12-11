@@ -18,6 +18,7 @@ signal stop                             #sygnały wysyłane do reszty kodu
 signal move
 signal purge
 
+
 #funkcja rozpoczęcia rozgrywki
 func new_game():
     started=true

@@ -4,16 +4,30 @@ extends Node2D
 
 var Ball = preload("res://Ball.tscn")   #wczytywanie schematu piłki
 var Enemy = preload("res://BaseEnemy.tscn")
-var Basic = preload("res://BasePowerUp.tscn")
+var Extend = preload("res://ExtendPowerUp.tscn")
+var Fire = preload("res://FirePowerUp.tscn")
+var Extra = preload("res://ExtraLifePowerUp.tscn")
+var Balls = preload("res://ExtraBallPowerUp.tscn")
+var Sticky = preload("res://StickyPowerUp.tscn")
+var Win = preload("res://WinPowerUp.tscn")
+var Slow = preload("res://SlowPowerUp.tscn")
 var score=0                             #inicjalizacja wyniki
 var started=false                       #czy rozgrywka się zaczeła?, używana w logice gry
 var life=3                              #inicjalizacja ilości żyć
 var blocks_left=0                       #licznik bloczków
 var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
 var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
-export var upgrade_count=5              #ilosc ulepszen ogółem
-export var basic_powerup_count=5        #ilosc ulepszen podstawowych(tutaj poszerza kijek)
+var upgrade_count=0                     #suma ulepszen
+export var extend_powerup_count=3       #ilosc ulepszen poszerzających kijek)
+export var fire_powerup_count=4
+export var extra_life_count=2           #ilosc ulepszen dających dodatkowe życie
+export var sticky_count=3               #ilosc ulepszen "przyklejacych" piłke do kijka
+export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
+export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
+export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
 export var level=1                      #obecny poziom gry
+var extra_balls_spawn=0                 #ilosc dostępnych extra piłek
+var extra_balls=0                       #ilosc dodatkowych piłek
 signal stop                             #sygnały wysyłane do reszty kodu
 signal move
 signal purge
@@ -22,19 +36,26 @@ signal purge
 #funkcja rozpoczęcia rozgrywki
 func new_game():
     started=true
-    var c = Ball.instance()
-    c.start(($Paddle.position+Vector2(0,-30)))
-    $Paddle/BallDummy.hide()
-    self.connect("stop",c,"stop_movement")
-    self.connect("purge",c,"die")
-    get_parent().add_child(c)
+    _spawn_ball()
     emit_signal("move")
     $Hud.hide_message()
     $SpeedUpTimer.start()
 
+func _spawn_ball():
+    var c = Ball.instance()
+    c.start(($Paddle.position+Vector2(0,-30)))
+    if extra_balls==0:
+        $Paddle/BallDummy.hide()
+    self.connect("stop",c,"stop_movement")
+    self.connect("purge",c,"die")
+    $Paddle.connect("half_speed",c,"_half")
+    get_parent().add_child(c)
+
 #ustawienie elementów gry do rozgrywki
 func _ready():
     randomize()
+    upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
+    + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
     $Paddle.start($StartPosition.position)
     var blocks = get_tree().get_nodes_in_group("Block")
     blocks_left = blocks.size()
@@ -57,24 +78,41 @@ func _ready():
         sample[i].set_power(powerup_list[i])
     $Hud.show_message("Press SPACE to start")
 
+func _add_life():
+    life+=1
+    $Hud.update_life(life)
+
 #funkcja zwracająca liste ulepszen, TODO: rozszerzyć o więcej ulepszeń
 func _powerup_list():
     var list=[]
-    for i in range(basic_powerup_count):
-        list.append(Basic)
+    for i in range(extend_powerup_count):
+        list.append(Extend)
+    for i in range(sticky_count):
+        list.append(Sticky)
+    for i in range(extra_life_count):
+        list.append(Extra)
+    for i in range(win_powerup_count):
+        list.append(Win)
+    for i in range(extra_balls_powerup_count):
+        list.append(Balls)
+    for i in range(slow_powerup_count):
+        list.append(Slow)
+    for i in range(fire_powerup_count):
+        list.append(Fire)
     return list
 
 #sprawdzanie czy można wywołąć przeciwnika dla animacji
 func _spawn_check():
     return spawn_permission and spawn_trigger_value > blocks_left
-        
-# wywołanie przeciwnika, jeśli 
+
+# wywołanie przeciwnika, jeśli
 func _spawn_enemy():
     if _spawn_check():
         spawn_permission=false
         var e = Enemy.instance()
         e.start(($Top/SpawnPosition.get_global_transform_with_canvas().get_origin()))
         self.connect("stop",e,"stop_movement")
+        self.connect("purge",e,"die")
         self.connect("move",e,"restart_movement")
         e.connect("release",self,"_enable_enemy")
         e.connect("points",self,"_get_points")
@@ -96,19 +134,19 @@ func _get_points(points,is_block):
             return
     if _spawn_check():
         $Top/AnimatedSprite.play("")
-    
+
 #funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
     $EscapeTimer.start()
-    
+
 #funkcja przegrania gry, powrót do menu po czasie
 func _game_over():
     emit_signal("stop")
     $Hud.show_message("GAME OVER")
     $EscapeTimer.start()
-    
+
 #warning-ignore:unused_argument
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
 func _process(delta):
@@ -117,21 +155,35 @@ func _process(delta):
     if Input.is_action_just_pressed("ui_cancel"):
         emit_signal("purge")
         get_tree().change_scene("res://MainMenu.tscn")
-                
+    if Input.is_action_just_pressed("ui_select") and started and extra_balls_spawn>0 and $Paddle.upgrade==4:
+        extra_balls_spawn-=1
+        extra_balls+=1
+        _spawn_ball()
+        if extra_balls_spawn == 0:
+            $Paddle/BallDummy.hide()
+
 #funkcja ucieczki piłki, sprawdzanie warunku porażki
 func _on_Bottom_redo():
-    life-=1
-    $Hud.update_life(life)
-    if life>0:
-        emit_signal("stop")
-        $Paddle.reset()
-        $Paddle/BallDummy.show()
-        $Hud.show_message("Press SPACE to start")
-        $Paddle.start($StartPosition.position)
-        started=false
+    if extra_balls>0:
+        extra_balls-=1
     else:
-        _game_over()
-        
+        life-=1
+        $Hud.update_life(life)
+        if life>0:
+            emit_signal("stop")
+            $Paddle.reset()
+            $Paddle/BallDummy.show()
+            $Hud.show_message("Press SPACE to start")
+            $Paddle.start($StartPosition.position)
+            started=false
+        else:
+            _game_over()
+
+#funkcja ustawiająca więcej piłek
+func _extra_balls():
+    extra_balls_spawn=2
+    $Paddle/BallDummy.show()
+
 #funkcja umożliwiająca wywołanie przeciwnika, potrzebna dla jednego sygnału
 func _enable_enemy():
     spawn_permission=true
@@ -155,6 +207,7 @@ func _on_SpeedUpTimer_timeout():
 
 #funkcja powracająca do Menu po upływie czasu
 func _on_EscapeTimer_timeout():
+    emit_signal("purge")
     get_tree().change_scene("res://MainMenu.tscn")
 
 #funkcja wywołująca przeciwnika po animacji otwierania

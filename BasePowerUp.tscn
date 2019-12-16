@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/BasePowerUp.gd" type="Script" id=1]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 10 )
 
@@ -23,7 +22,7 @@ margin_left = -20.0
 margin_top = -10.0
 margin_right = 20.0
 margin_bottom = 10.0
-color = Color( 0.0196078, 0, 0.580392, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_BasePowerUp_body_entered"]

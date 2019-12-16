@@ -36,6 +36,7 @@ __meta__ = {
 }
 
 [node name="Paddle" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )
@@ -48,8 +49,11 @@ position = Vector2( 22, 540 )
 [node name="Right" parent="." instance=ExtResource( 4 )]
 position = Vector2( 788, 540 )
 
-[node name="Top" type="StaticBody2D" parent="."]
+[node name="Top" type="StaticBody2D" parent="." groups=[
+"Top",
+]]
 position = Vector2( 405, 22 )
+collision_layer = 3
 physics_material_override = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true,
@@ -60,10 +64,9 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="SpawnPosition" type="Position2D" parent="Top"]
-position = Vector2( 200, 6 )
+position = Vector2( 0, 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Top"]
-position = Vector2( 200, 0 )
 frames = SubResource( 2 )
 animation = "open"
 

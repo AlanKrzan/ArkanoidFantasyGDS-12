@@ -22,99 +22,131 @@ self_modulate = Color( 0.666667, 0.160784, 0.160784, 1 )
 
 [node name="WhiteBlock" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( 85, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock2" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( 165, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock3" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 245, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock4" parent="." index="13" instance=ExtResource( 2 )]
 position = Vector2( 325, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock5" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 485, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock6" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( 565, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock7" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 645, 67.5 )
+collision_mask = 1
 
 [node name="WhiteBlock8" parent="." index="17" instance=ExtResource( 2 )]
 position = Vector2( 725, 67.5 )
+collision_mask = 1
 
 [node name="PinkBlock" parent="." index="18" instance=ExtResource( 3 )]
 position = Vector2( 85, 112.5 )
+collision_mask = 1
 
 [node name="PinkBlock2" parent="." index="19" instance=ExtResource( 3 )]
 position = Vector2( 245, 112.5 )
+collision_mask = 1
 
 [node name="PinkBlock3" parent="." index="20" instance=ExtResource( 3 )]
 position = Vector2( 325, 112.5 )
+collision_mask = 1
 
 [node name="PinkBlock4" parent="." index="21" instance=ExtResource( 3 )]
 position = Vector2( 565, 112.5 )
+collision_mask = 1
 
 [node name="PinkBlock6" parent="." index="22" instance=ExtResource( 3 )]
 position = Vector2( 725, 112.5 )
+collision_mask = 1
 
 [node name="PinkBlock5" parent="." index="23" instance=ExtResource( 3 )]
 position = Vector2( 485, 112.5 )
+collision_mask = 1
 
 [node name="SilverBlock" parent="." index="24" instance=ExtResource( 4 )]
 position = Vector2( 165, 112.5 )
+collision_mask = 1
 
 [node name="SilverBlock3" parent="." index="25" instance=ExtResource( 4 )]
 position = Vector2( 245, 157.5 )
+collision_mask = 1
 
 [node name="SilverBlock4" parent="." index="26" instance=ExtResource( 4 )]
 position = Vector2( 565, 157.5 )
+collision_mask = 1
 
 [node name="SilverBlock2" parent="." index="27" instance=ExtResource( 4 )]
 position = Vector2( 645, 112.5 )
+collision_mask = 1
 
 [node name="Block" parent="." index="28" instance=ExtResource( 5 )]
 position = Vector2( 85, 157.5 )
+collision_mask = 1
 
 [node name="Block2" parent="." index="29" instance=ExtResource( 5 )]
 position = Vector2( 165, 157.5 )
+collision_mask = 1
 
 [node name="Block3" parent="." index="30" instance=ExtResource( 5 )]
 position = Vector2( 325, 157.5 )
+collision_mask = 1
 
 [node name="Block4" parent="." index="31" instance=ExtResource( 5 )]
 position = Vector2( 485, 157.5 )
+collision_mask = 1
 
 [node name="Block5" parent="." index="32" instance=ExtResource( 5 )]
 position = Vector2( 645, 157.5 )
+collision_mask = 1
 
 [node name="Block6" parent="." index="33" instance=ExtResource( 5 )]
 position = Vector2( 725, 157.5 )
+collision_mask = 1
 
 [node name="OrangeBlock" parent="." index="34" instance=ExtResource( 6 )]
 position = Vector2( 85, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock3" parent="." index="35" instance=ExtResource( 6 )]
 position = Vector2( 245, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock2" parent="." index="36" instance=ExtResource( 6 )]
 position = Vector2( 165, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock4" parent="." index="37" instance=ExtResource( 6 )]
 position = Vector2( 325, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock5" parent="." index="38" instance=ExtResource( 6 )]
 position = Vector2( 485, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock6" parent="." index="39" instance=ExtResource( 6 )]
 position = Vector2( 565, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock7" parent="." index="40" instance=ExtResource( 6 )]
 position = Vector2( 645, 202.5 )
+collision_mask = 1
 
 [node name="OrangeBlock8" parent="." index="41" instance=ExtResource( 6 )]
 position = Vector2( 725, 202.5 )
+collision_mask = 1
 
 [node name="GoldenBlock" parent="." index="42" instance=ExtResource( 7 )]
 position = Vector2( 85, 291.55 )
@@ -130,108 +162,144 @@ position = Vector2( 725, 292.5 )
 
 [node name="SilverBlock5" parent="." index="46" instance=ExtResource( 4 )]
 position = Vector2( 165, 292.5 )
+collision_mask = 1
 
 [node name="SilverBlock6" parent="." index="47" instance=ExtResource( 4 )]
 position = Vector2( 325, 292.5 )
+collision_mask = 1
 
 [node name="SilverBlock7" parent="." index="48" instance=ExtResource( 4 )]
 position = Vector2( 485, 292.5 )
+collision_mask = 1
 
 [node name="SilverBlock8" parent="." index="49" instance=ExtResource( 4 )]
 position = Vector2( 645, 292.5 )
+collision_mask = 1
 
 [node name="YellowBlock" parent="." index="50" instance=ExtResource( 8 )]
 position = Vector2( 85, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock2" parent="." index="51" instance=ExtResource( 8 )]
 position = Vector2( 165, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock3" parent="." index="52" instance=ExtResource( 8 )]
 position = Vector2( 245, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock4" parent="." index="53" instance=ExtResource( 8 )]
 position = Vector2( 325, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock5" parent="." index="54" instance=ExtResource( 8 )]
 position = Vector2( 485, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock6" parent="." index="55" instance=ExtResource( 8 )]
 position = Vector2( 565, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock7" parent="." index="56" instance=ExtResource( 8 )]
 position = Vector2( 645, 382.5 )
+collision_mask = 1
 
 [node name="YellowBlock8" parent="." index="57" instance=ExtResource( 8 )]
 position = Vector2( 725, 382.5 )
+collision_mask = 1
 
 [node name="GreenBlock" parent="." index="58" instance=ExtResource( 9 )]
 position = Vector2( 85, 427.5 )
+collision_mask = 1
 
 [node name="GreenBlock2" parent="." index="59" instance=ExtResource( 9 )]
 position = Vector2( 165, 427.5 )
+collision_mask = 1
 
 [node name="GreenBlock3" parent="." index="60" instance=ExtResource( 9 )]
 position = Vector2( 325, 427.5 )
+collision_mask = 1
 
 [node name="GreenBlock4" parent="." index="61" instance=ExtResource( 9 )]
 position = Vector2( 485, 427.5 )
+collision_mask = 1
 
 [node name="GreenBlock5" parent="." index="62" instance=ExtResource( 9 )]
 position = Vector2( 645, 427.5 )
+collision_mask = 1
 
 [node name="GreenBlock6" parent="." index="63" instance=ExtResource( 9 )]
 position = Vector2( 725, 427.5 )
+collision_mask = 1
 
 [node name="SilverBlock9" parent="." index="64" instance=ExtResource( 4 )]
 position = Vector2( 245, 427.5 )
+collision_mask = 1
 
 [node name="SilverBlock10" parent="." index="65" instance=ExtResource( 4 )]
 position = Vector2( 565, 427.5 )
+collision_mask = 1
 
 [node name="CyanBlock" parent="." index="66" instance=ExtResource( 10 )]
 position = Vector2( 85, 472.5 )
+collision_mask = 1
 
 [node name="CyanBlock2" parent="." index="67" instance=ExtResource( 10 )]
 position = Vector2( 245, 472.5 )
+collision_mask = 1
 
 [node name="CyanBlock3" parent="." index="68" instance=ExtResource( 10 )]
 position = Vector2( 325, 472.5 )
+collision_mask = 1
 
 [node name="CyanBlock4" parent="." index="69" instance=ExtResource( 10 )]
 position = Vector2( 485, 472.5 )
+collision_mask = 1
 
 [node name="CyanBlock5" parent="." index="70" instance=ExtResource( 10 )]
 position = Vector2( 565, 472.5 )
+collision_mask = 1
 
 [node name="CyanBlock6" parent="." index="71" instance=ExtResource( 10 )]
 position = Vector2( 725, 472.5 )
+collision_mask = 1
 
 [node name="SilverBlock11" parent="." index="72" instance=ExtResource( 4 )]
 position = Vector2( 165, 472.5 )
+collision_mask = 1
 
 [node name="SilverBlock12" parent="." index="73" instance=ExtResource( 4 )]
 position = Vector2( 645, 472.5 )
+collision_mask = 1
 
 [node name="BlueBlock" parent="." index="74" instance=ExtResource( 11 )]
 position = Vector2( 85, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock2" parent="." index="75" instance=ExtResource( 11 )]
 position = Vector2( 165, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock3" parent="." index="76" instance=ExtResource( 11 )]
 position = Vector2( 245, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock4" parent="." index="77" instance=ExtResource( 11 )]
 position = Vector2( 325, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock5" parent="." index="78" instance=ExtResource( 11 )]
 position = Vector2( 485, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock6" parent="." index="79" instance=ExtResource( 11 )]
 position = Vector2( 565, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock7" parent="." index="80" instance=ExtResource( 11 )]
 position = Vector2( 645, 517.5 )
+collision_mask = 1
 
 [node name="BlueBlock8" parent="." index="81" instance=ExtResource( 11 )]
 position = Vector2( 725, 517.5 )
+collision_mask = 1

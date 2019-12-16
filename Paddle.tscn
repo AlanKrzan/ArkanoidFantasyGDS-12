@@ -15,8 +15,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-margin = 30
-paddle_width = 30
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 30 )

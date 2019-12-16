@@ -3,13 +3,12 @@
 [ext_resource path="res://Scripts/BaseEnemy.gd" type="Script" id=1]
 [ext_resource path="res://art/icon.png" type="Texture" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.51265, 6.56766 )
 
 [node name="BaseEnemy" type="KinematicBody2D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
 

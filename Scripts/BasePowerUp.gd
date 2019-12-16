@@ -17,10 +17,6 @@ func _ready():
 func _process(delta):
     position+=velocity*delta
 
-func _on_BasePowerUp_body_entered(body):
-    if body.has_method("power_up"):
-        body.power_up(1)
-        queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():

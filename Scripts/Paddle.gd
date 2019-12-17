@@ -7,6 +7,8 @@ var l_margin
 var r_margin
 export var paddle_speed = 500  # How fast the player will move (pixels/sec).
 export var paddle_width = 60
+export var reload_time = 0.1
+var reloading=0
 var screen_size # Size of the game window.
 onready var initial_pos = self.position
 var speed = paddle_speed
@@ -108,12 +110,13 @@ func _reset_power():
     screen_size = get_viewport_rect().size
     r_margin=screen_size.x-l_margin
     
+#warning-ignore:unused_argument    
 #funkcja przygotująca kijek do rozgrywki
 func _ready():
     parent=get_parent()
-    self.connect("extraLife",parent,"_add_life")
-    self.connect("win",parent,"_win")
-    self.connect("extraBalls",parent,"_extra_balls")
+    var suppress_warning = self.connect("extraLife",parent,"_add_life")
+    suppress_warning = self.connect("win",parent,"_win")
+    suppress_warning = self.connect("extraBalls",parent,"_extra_balls")
     _reset_power()
     var north = Vector2(0,-1)
     for i in range(angles.size()):
@@ -135,6 +138,7 @@ func _stop_movement():
 # obsluga poruszania się
 func _process(delta):
     if on:
+        reloading-=delta
         var velocity = 0  # The paddle movement value.
         if Input.is_action_pressed("ui_right"):
             velocity = 1
@@ -150,9 +154,13 @@ func _process(delta):
             if upgrade==3:
                 emit_signal("disconnect")
             elif upgrade==2:
-                var b = Bullet.instance()
-                b.start(position+Vector2(0,-30))
-                parent.connect("purge",b,"_die")
-                parent.add_child(b)
+                if reloading <=0.0:
+                    var b = Bullet.instance()
+                    b.start(position+Vector2(0,-30))
+                    parent.connect("stop",b,"_stop_movement")
+                    parent.connect("purge",b,"_die")
+                    parent.connect("die",b,"_die")
+                    parent.add_child(b)
+                    reloading = reload_time
         
         

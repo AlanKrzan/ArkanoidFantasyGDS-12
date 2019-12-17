@@ -134,11 +134,12 @@ func _get_points(points,is_block):
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
-    $EscapeTimer.start()
+    $WinTimer.start()
 
 #funkcja przegrania gry, powrót do menu po czasie
 func _game_over():
     emit_signal("stop")
+    Global.score=0
     $Hud.show_message("GAME OVER")
     $EscapeTimer.start()
 
@@ -210,3 +211,8 @@ func _on_EscapeTimer_timeout():
 func _on_AnimatedSprite_animation_finished():
     _spawn_enemy()
     $Top/AnimatedSprite.stop()
+
+
+func _on_WinTimer_timeout():
+    emit_signal("purge")
+    get_tree().change_scene("res://MainMenu.tscn")

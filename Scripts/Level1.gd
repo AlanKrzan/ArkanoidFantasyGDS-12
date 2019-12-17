@@ -47,6 +47,8 @@ func _spawn_ball():
 #ustawienie elementów gry do rozgrywki
 func _ready():
     randomize()
+    Global.score=0
+    Global.life=3
     $Hud.update_score(Global.score)
     upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
     + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
@@ -134,11 +136,12 @@ func _get_points(points,is_block):
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
-    $EscapeTimer.start()
+    $WinTimer.start()
 
 #funkcja przegrania gry, powrót do menu po czasie
 func _game_over():
     emit_signal("stop")
+    Global.score=0
     $Hud.show_message("GAME OVER")
     $EscapeTimer.start()
 
@@ -210,3 +213,8 @@ func _on_EscapeTimer_timeout():
 func _on_AnimatedSprite_animation_finished():
     _spawn_enemy()
     $Top/AnimatedSprite.stop()
+
+
+func _on_WinTimer_timeout():
+    emit_signal("purge")
+    get_tree().change_scene("res://Level2.tscn")

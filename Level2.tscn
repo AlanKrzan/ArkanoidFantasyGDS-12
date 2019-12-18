@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Level2.gd" type="Script" id=2]
 [ext_resource path="res://WhiteBlock.tscn" type="PackedScene" id=3]
 
-[node name="Level1" index="0" instance=ExtResource( 1 )]
+[node name="Level1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="StartPosition" parent="." index="0"]

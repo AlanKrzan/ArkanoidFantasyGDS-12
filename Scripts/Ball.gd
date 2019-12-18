@@ -33,16 +33,23 @@ func _physics_process(delta):
                 collision.collider.hit()
             var motion = collision.remainder.bounce(collision.normal)
             if collision.collider.has_method("power_up"):
-                if collision.collider.upgrade==3:
-                    collision.collider.connect("follow",self,"_move")
-                    collision.collider.connect("disconnect",self,"_disconnect")
-                    host=collision.collider
-                    l_margin=host.edge_size+host.paddle_width-(host.position.x-position.x)
-                    r_margin=get_viewport_rect().size.x-host.edge_size-(host.position.x+host.paddle_width-position.x)
-                    on=false
-                    oldVelocity=velocity.bounce(collision.normal)
-                #print(collision.get_normal())
-            if on:
+                if collision.collider.has_method("angles"):
+                    var movements = collision.collider.angles(position.x,velocity,collision)
+                    if collision.collider.upgrade==3:
+                        collision.collider.connect("follow",self,"_move")
+                        collision.collider.connect("disconnect",self,"_disconnect")
+                        host=collision.collider
+                        l_margin=host.edge_size+host.paddle_width-(host.position.x-position.x)
+                        r_margin=get_viewport_rect().size.x-host.edge_size-(host.position.x+host.paddle_width-position.x)
+                        on=false
+                        oldVelocity = movements[1]
+                    else:
+                        move_and_collide(movements[0]*delta)
+                        velocity = movements[1]
+                else:
+                    velocity = velocity.bounce(collision.normal)
+                    collision=move_and_collide(motion)
+            else:
                 velocity = velocity.bounce(collision.normal)
                 collision=move_and_collide(motion)
 

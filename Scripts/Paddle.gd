@@ -16,6 +16,7 @@ var upgrade = 0
 export var power_up_width_scale=2
 var sprite_scale=2
 var on=false
+const north=Vector2(0,-1)
 var angles=[-40,-25,-10,10,25,40]
 var parent=get_parent()
 signal extraLife
@@ -63,16 +64,19 @@ func power_up(value):
         
 
 #funkcja obsługi ruchu?, powstała bo coś kombinowałem i nie chciałem powtarzać ten sam kod
-func __motion(velocity,collision,normal):
-    var motion = collision.remainder.bounce(normal)
-    velocity = velocity.bounce(normal)
+func __motion(velocity,collision,angle):
+    var motion = collision.remainder.bounce(north)
+    var angle_from_north = velocity.angle_to(north) + angle
+    print(angle," part of ",angle_from_north, "deegress ",rad2deg(angle_from_north)," north:",north)
+    velocity = velocity.rotated(angle_from_north)
+    motion = motion.rotated(motion.angle_to(north)+angle)
     return [motion,velocity]
 
 #funckja obliczająca alternatywny vector normalny odbicia, w zależności od pozycji, daje dziwne efekty dla kąta >45 od północy
-func angle(ball_position_x,velocity,collision):
+func angles(ball_position_x,velocity,collision):
     var width
     if upgrade==1:
-        width=paddle_width*2
+        width=paddle_width * power_up_width_scale
     else:
         width=paddle_width
     var distance
@@ -120,8 +124,7 @@ func _ready():
     _reset_power()
     var north = Vector2(0,-1)
     for i in range(angles.size()):
-        angles[i]=north.rotated(deg2rad(angles[i]))
-    #print(angles)
+        angles[i]=deg2rad(angles[i])
     screen_size = get_viewport_rect().size
     l_margin = margin +edge_size
     r_margin =  screen_size.x - l_margin

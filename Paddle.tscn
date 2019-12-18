@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Paddle.gd" type="Script" id=1]
-[ext_resource path="res://art/icon.png" type="Texture" id=2]
+[ext_resource path="res://art/czarodziej-1.png" type="Texture" id=2]
+[ext_resource path="res://art/czarodziej long-1.png" type="Texture" id=3]
+[ext_resource path="res://art/czarodziej strzelanie-1.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 60, 1 )
@@ -16,9 +18,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 30 )
-scale = Vector2( 2, 1 )
+[node name="Normal" type="Sprite" parent="."]
+position = Vector2( 0, 35 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -31,3 +32,12 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Long" type="Sprite" parent="."]
+position = Vector2( 0, 30 )
+texture = ExtResource( 3 )
+
+[node name="Shooting" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, 35 )
+texture = ExtResource( 4 )

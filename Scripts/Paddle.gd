@@ -13,7 +13,7 @@ var screen_size # Size of the game window.
 onready var initial_pos = self.position
 var speed = paddle_speed
 var upgrade = 0
-export var power_up_width_scale=2
+export var power_up_width_scale=1.5
 var sprite_scale=2
 var on=false
 const north=Vector2(0,-1)
@@ -42,13 +42,16 @@ func power_up(value):
     print("power up:"+str(value))
     if value==1:
         upgrade=1
+        $Normal.hide()
         var shape = $CollisionShape2D.get_shape()
         var oldScale = shape.get_extents()
         shape.set_extents(Vector2(paddle_width*power_up_width_scale,oldScale.y))
-        $Sprite.scale=Vector2(power_up_width_scale*sprite_scale,1)
+        $Long.show()
         l_margin=margin*power_up_width_scale+edge_size
         r_margin=screen_size.x-l_margin
     elif value==2:
+        $Shooting.show()
+        $Normal.hide()
         upgrade=2
     elif value==3:
         upgrade=3
@@ -109,7 +112,9 @@ func _reset_power():
     var shape = $CollisionShape2D.get_shape()
     var oldScale = shape.get_extents()
     shape.set_extents(Vector2(paddle_width,oldScale.y))
-    $Sprite.scale=Vector2(sprite_scale,1)
+    $Shooting.hide()
+    $Long.hide()
+    $Normal.show()
     l_margin=margin+edge_size
     screen_size = get_viewport_rect().size
     r_margin=screen_size.x-l_margin

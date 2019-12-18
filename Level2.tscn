@@ -6,6 +6,7 @@
 
 [node name="Level1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+level = 2
 
 [node name="StartPosition" parent="." index="0"]
 position = Vector2( 400, 990 )

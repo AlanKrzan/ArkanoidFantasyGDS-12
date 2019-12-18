@@ -13,7 +13,7 @@ var screen_size # Size of the game window.
 onready var initial_pos = self.position
 var speed = paddle_speed
 var upgrade = 0
-export var power_up_width_scale=2
+export var power_up_width_scale=1.5
 var sprite_scale=2
 var on=false
 var angles=[-40,-25,-10,10,25,40]
@@ -33,6 +33,7 @@ func start(pos):
 func reset():
     position = initial_pos
     _reset_power()
+
     
 #funckaj przyznająca ulepszenia, TODO: dodać więcej
 func power_up(value):
@@ -44,10 +45,13 @@ func power_up(value):
         var shape = $CollisionShape2D.get_shape()
         var oldScale = shape.get_extents()
         shape.set_extents(Vector2(paddle_width*power_up_width_scale,oldScale.y))
-        $Sprite.scale=Vector2(power_up_width_scale*sprite_scale,1)
+        $Normal.hide()
+        $Long.show()
         l_margin=margin*power_up_width_scale+edge_size
         r_margin=screen_size.x-l_margin
     elif value==2:
+        $Normal.hide()
+        $Shooting.show()
         upgrade=2
     elif value==3:
         upgrade=3
@@ -101,11 +105,13 @@ func angle(ball_position_x,velocity,collision):
 #funkcja resetująca ulepszenia TODO: cofnąć inne ulepszenia jeśli coś zmieniają, jak powstaną
 func _reset_power():
     upgrade=0
+    $Normal.show()
+    $Shooting.hide()
+    $Long.hide()
     emit_signal("disconnect")
     var shape = $CollisionShape2D.get_shape()
     var oldScale = shape.get_extents()
     shape.set_extents(Vector2(paddle_width,oldScale.y))
-    $Sprite.scale=Vector2(sprite_scale,1)
     l_margin=margin+edge_size
     screen_size = get_viewport_rect().size
     r_margin=screen_size.x-l_margin

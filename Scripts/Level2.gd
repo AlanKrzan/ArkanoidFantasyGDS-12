@@ -2,11 +2,9 @@ extends "res://Scripts/BaseLevel.gd"
 #warning-ignore-all:unused_variable
 #warning-ignore-all:return_value_discarded
 
-
-
-
-
-
+#funkcje importowane z BaseLevel.gd: new_game, _spawn_ball, _add_life, _powerup_list, _spawn_check, _spawn_enemy,
+# _leaving, _process, _extra_balls, _enable_enemy, __rand_sample, _on_SpeedUpTimer_timeout, _on_EscapeTimer_timeout,
+# _on_AnimatedSprite_animation_finished
 
 #ustawienie elementów gry do rozgrywki
 func _ready():
@@ -76,12 +74,7 @@ func _process(delta):
     if Input.is_action_just_pressed("ui_cancel"):
         emit_signal("purge")
         get_tree().change_scene("res://MainMenu.tscn")
-    if Input.is_action_just_pressed("ui_select") and started and extra_balls_spawn>0 and $Paddle.upgrade==4:
-        extra_balls_spawn-=1
-        extra_balls+=1
-        _spawn_ball()
-        if extra_balls_spawn == 0:
-            $Paddle/BallDummy.hide()
+
 
 #funkcja ucieczki piłki, sprawdzanie warunku porażki
 func _on_Bottom_redo():

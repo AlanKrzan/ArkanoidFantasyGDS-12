@@ -17,7 +17,6 @@ export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
 export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
 export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
 export var level=1                      #obecny poziom gry
-var extra_balls_spawn=0                 #ilosc dostępnych extra piłek
 var extra_balls=0                       #ilosc dodatkowych piłek
 signal stop                             #sygnały wysyłane do reszty kodu
 signal move
@@ -102,19 +101,23 @@ func _process(delta):
     if Input.is_action_just_released("ui_cancel"):
         emit_signal("purge")
         get_tree().change_scene("res://MainMenu.tscn")
-    if Input.is_action_just_pressed("ui_select") and started and extra_balls_spawn>0 and $Paddle.upgrade==4:
-        extra_balls_spawn-=1
-        extra_balls+=1
-        _spawn_ball()
-        if extra_balls_spawn == 0:
-            $Paddle/BallDummy.hide()
 
 
 
-#funkcja ustawiająca więcej piłek
+
+#funkcja tworząca więcej piłek
 func _extra_balls():
-    extra_balls_spawn=2
-    $Paddle/BallDummy.show()
+    var balls = get_tree().get_nodes_in_group("Ball")
+    for ball in balls:
+        for i in range(2):
+            var c = Global.Ball.instance()
+            c.start(ball.position,ball.velocity.rotated(deg2rad(120+120*i)))
+            self.connect("stop",c,"stop_movement")
+            self.connect("die",c,"die")
+            self.connect("purge",c,"die")
+            $Paddle.connect("half_speed",c,"_half")
+            get_parent().call_deferred("add_child",c)
+        extra_balls+=2
 
 #funkcja umożliwiająca wywołanie przeciwnika, potrzebna dla jednego sygnału
 func _enable_enemy():

@@ -19,9 +19,7 @@ func hit():
 func set_power(powerup):
     power_up=powerup
 
-#warning-ignore-all:unused_variable   
-func set_level(current_level):
-    pass
+
     
 func _get_score(): # wstępna deklaracja funkcji obliczającej ilość punktów
     return score

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Paddle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://art/sixthsense.png" type="Texture" id=3]
+[ext_resource path="res://art/ball.png" type="Texture" id=3]
 [ext_resource path="res://Edge.tscn" type="PackedScene" id=4]
 [ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=5]
 [ext_resource path="res://art/gate0.png" type="Texture" id=6]
@@ -40,7 +40,6 @@ position = Vector2( 0, 0 )
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )
-scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 3 )
 
 [node name="Left" parent="." instance=ExtResource( 4 )]

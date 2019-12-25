@@ -1,28 +1,7 @@
-extends Node2D
+extends "res://Scripts/BaseLevel.gd"
 #warning-ignore-all:unused_variable
 #warning-ignore-all:return_value_discarded
 
-
-var started=false                       #czy rozgrywka się zaczeła?, używana w logice gry
-var life=3                              #inicjalizacja ilości żyć
-var blocks_left=0                       #licznik bloczków
-var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
-var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
-var upgrade_count=0                     #suma ulepszen
-export var extend_powerup_count=3       #ilosc ulepszen poszerzających kijek)
-export var fire_powerup_count=4
-export var extra_life_count=2           #ilosc ulepszen dających dodatkowe życie
-export var sticky_count=3               #ilosc ulepszen "przyklejacych" piłke do kijka
-export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
-export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
-export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
-export var level=1                      #obecny poziom gry
-var extra_balls_spawn=0                 #ilosc dostępnych extra piłek
-var extra_balls=0                       #ilosc dodatkowych piłek
-signal stop                             #sygnały wysyłane do reszty kodu
-signal move
-signal purge
-signal die
 
 
 #funkcja rozpoczęcia rozgrywki
@@ -131,12 +110,17 @@ func _get_points(points,is_block):
             return
     if _spawn_check():
         $Top/AnimatedSprite.play("")
+        
+func _leaving():
+    emit_signal("stop")
+    $Hud.show_message("Leaving")
 
 #funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
     $WinTimer.start()
+    print("win timer")
 
 #funkcja przegrania gry, powrót do menu po czasie
 func _game_over():
@@ -216,5 +200,6 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_WinTimer_timeout():
+    print("exit timeout")
     emit_signal("purge")
     get_tree().change_scene("res://Level2.tscn")

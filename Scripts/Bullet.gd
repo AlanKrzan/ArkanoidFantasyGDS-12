@@ -21,6 +21,5 @@ func _physics_process(delta):
                 queue_free()
     
 func _die():
-    print(" I died")
     queue_free()
         

@@ -13,8 +13,13 @@
 [ext_resource path="res://CyanBlock.tscn" type="PackedScene" id=11]
 [ext_resource path="res://BlueBlock.tscn" type="PackedScene" id=12]
 
-[node name="Level1" instance=ExtResource( 1 )]
+[node name="Level1" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+extend_powerup_count = 2
+fire_powerup_count = 2
+sticky_count = 2
+win_powerup_count = 1
+extra_balls_powerup_count = 2
 
 [node name="StartPosition" parent="." index="0"]
 position = Vector2( 400, 990 )
@@ -84,18 +89,22 @@ collision_mask = 1
 [node name="SilverBlock" parent="." index="25" instance=ExtResource( 5 )]
 position = Vector2( 165, 112.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock3" parent="." index="26" instance=ExtResource( 5 )]
 position = Vector2( 245, 157.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock4" parent="." index="27" instance=ExtResource( 5 )]
 position = Vector2( 565, 157.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock2" parent="." index="28" instance=ExtResource( 5 )]
 position = Vector2( 645, 112.5 )
 collision_mask = 1
+score = 5
 
 [node name="Block" parent="." index="29" instance=ExtResource( 6 )]
 position = Vector2( 85, 157.5 )
@@ -168,18 +177,22 @@ position = Vector2( 725, 292.5 )
 [node name="SilverBlock5" parent="." index="47" instance=ExtResource( 5 )]
 position = Vector2( 165, 292.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock6" parent="." index="48" instance=ExtResource( 5 )]
 position = Vector2( 325, 292.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock7" parent="." index="49" instance=ExtResource( 5 )]
 position = Vector2( 485, 292.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock8" parent="." index="50" instance=ExtResource( 5 )]
 position = Vector2( 645, 292.5 )
 collision_mask = 1
+score = 5
 
 [node name="YellowBlock" parent="." index="51" instance=ExtResource( 9 )]
 position = Vector2( 85, 382.5 )
@@ -240,10 +253,12 @@ collision_mask = 1
 [node name="SilverBlock9" parent="." index="65" instance=ExtResource( 5 )]
 position = Vector2( 245, 427.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock10" parent="." index="66" instance=ExtResource( 5 )]
 position = Vector2( 565, 427.5 )
 collision_mask = 1
+score = 5
 
 [node name="CyanBlock" parent="." index="67" instance=ExtResource( 11 )]
 position = Vector2( 85, 472.5 )
@@ -272,10 +287,12 @@ collision_mask = 1
 [node name="SilverBlock11" parent="." index="73" instance=ExtResource( 5 )]
 position = Vector2( 165, 472.5 )
 collision_mask = 1
+score = 5
 
 [node name="SilverBlock12" parent="." index="74" instance=ExtResource( 5 )]
 position = Vector2( 645, 472.5 )
 collision_mask = 1
+score = 5
 
 [node name="BlueBlock" parent="." index="75" instance=ExtResource( 12 )]
 position = Vector2( 85, 517.5 )

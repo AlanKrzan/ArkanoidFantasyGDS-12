@@ -129,6 +129,10 @@ func _get_points(points,is_block):
             return
     if _spawn_check():
         $Top/AnimatedSprite.play("")
+        
+func _leaving():
+    emit_signal("stop")
+    $Hud.show_message("Leaving")
 
 #funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():

@@ -14,10 +14,12 @@ onready var initial_pos = self.position
 var speed = paddle_speed
 var upgrade = 0
 export var power_up_width_scale=1.5
-var sprite_scale=2
+export var exit_speed=100
 var on=false
 const north=Vector2(0,-1)
-var angles=[-40,-25,-10,10,25,40]
+var victory=false
+var stay=true
+var angles_array=[-40,-25,-10,10,25,40]
 var parent=get_parent()
 signal extraLife
 signal follow(x)
@@ -25,6 +27,7 @@ signal disconnect
 signal win
 signal extraBalls
 signal half_speed
+signal leaving
 
 #ustawienie kijka na pozycji początkowej, i wyświetlenie go
 func start(pos):
@@ -40,7 +43,7 @@ func power_up(value):
     if upgrade != 0:
         _reset_power()
     print("power up:"+str(value))
-    if value==1:
+    if value==1:    #extend
         upgrade=1
         $Normal.hide()
         var shape = $CollisionShape2D.get_shape()
@@ -48,20 +51,24 @@ func power_up(value):
         shape.set_extents(Vector2(paddle_width*power_up_width_scale,oldScale.y))
         $Long.show()
         l_margin=margin*power_up_width_scale+edge_size
-        r_margin=screen_size.x-l_margin
-    elif value==2:
+        if stay:
+            r_margin=screen_size.x-l_margin
+        else:
+            r_margin=screen_size-margin
+    elif value==2: #shooting
         $Shooting.show()
         $Normal.hide()
         upgrade=2
-    elif value==3:
+    elif value==3: #sticky
         upgrade=3
-    elif value==4:
+    elif value==4: #Multiplication
         upgrade=4
         emit_signal("extraBalls")
     elif value==5:
         emit_signal("extraLife")
     elif value==6:
-        emit_signal("win")
+        stay=false
+        r_margin=screen_size.x-margin
     elif value==7:
         emit_signal("half_speed")
         
@@ -70,7 +77,6 @@ func power_up(value):
 func __motion(velocity,collision,angle):
     var motion = collision.remainder.bounce(north)
     var angle_from_north = velocity.angle_to(north) + angle
-    print(angle," part of ",angle_from_north, "deegress ",rad2deg(angle_from_north)," north:",north)
     velocity = velocity.rotated(angle_from_north)
     motion = motion.rotated(motion.angle_to(north)+angle)
     return [motion,velocity]
@@ -87,20 +93,20 @@ func angles(ball_position_x,velocity,collision):
         distance = position.x - ball_position_x
         if distance > width/3:
              if distance > width*2/3:
-                collision=__motion(velocity,collision,angles[0])
+                collision=__motion(velocity,collision,angles_array[0])
              else:
-                collision=__motion(velocity,collision,angles[1])
+                collision=__motion(velocity,collision,angles_array[1])
         else:
-            collision=__motion(velocity,collision,angles[2])
+            collision=__motion(velocity,collision,angles_array[2])
     elif position.x < ball_position_x:
         distance = ball_position_x - position.x
         if distance > width/3:
              if distance > width*2/3:
-                collision=__motion(velocity,collision,angles[5])
+                collision=__motion(velocity,collision,angles_array[5])
              else:
-                collision=__motion(velocity,collision,angles[4])
+                collision=__motion(velocity,collision,angles_array[4])
         else:
-            collision=__motion(velocity,collision,angles[3])
+            collision=__motion(velocity,collision,angles_array[3])
     else:
         collision=__motion(velocity,collision,collision.normal)
     return collision
@@ -117,19 +123,23 @@ func _reset_power():
     $Normal.show()
     l_margin=margin+edge_size
     screen_size = get_viewport_rect().size
-    r_margin=screen_size.x-l_margin
+    if stay:
+        r_margin=screen_size.x-l_margin
+    else:
+        r_margin=screen_size.x-margin
     
 #warning-ignore:unused_argument    
 #funkcja przygotująca kijek do rozgrywki
 func _ready():
     parent=get_parent()
+    # warning-ignore:unused_variable
     var suppress_warning = self.connect("extraLife",parent,"_add_life")
+    suppress_warning = self.connect("leaving",parent,"_leaving")
     suppress_warning = self.connect("win",parent,"_win")
     suppress_warning = self.connect("extraBalls",parent,"_extra_balls")
     _reset_power()
-    var north = Vector2(0,-1)
-    for i in range(angles.size()):
-        angles[i]=deg2rad(angles[i])
+    for i in range(angles_array.size()):
+        angles_array[i]=deg2rad(angles_array[i])
     screen_size = get_viewport_rect().size
     l_margin = margin +edge_size
     r_margin =  screen_size.x - l_margin
@@ -156,6 +166,10 @@ func _process(delta):
             velocity = velocity * speed * delta
             var newpos = position.x + velocity
             position.x = clamp(newpos, l_margin, r_margin)
+            if position.x >= screen_size.x-margin:
+                on=false
+                emit_signal("leaving")
+                stay=false
             if newpos!=position.x:
                 emit_signal("follow",velocity)
         if Input.is_action_just_pressed("ui_select"):
@@ -170,5 +184,8 @@ func _process(delta):
                     parent.connect("die",b,"_die")
                     parent.add_child(b)
                     reloading = reload_time
-        
-        
+    elif stay==false:
+        position.x+=exit_speed*delta
+        if position.x>=screen_size.x-5 and not victory:
+            emit_signal("win")
+            victory=true

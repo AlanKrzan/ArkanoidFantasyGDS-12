@@ -10,8 +10,10 @@ func _on_Exit_pressed():
     get_tree().quit()
 
 func _process(delta):
-    if Input.is_action_just_pressed("ui_select"):
+    if Input.is_action_just_released("ui_select"): 
         _on_PlayButton_pressed()
+    if Input.is_action_just_pressed("ui_cancel"):
+        _on_Exit_pressed()
 
 func _on_PlayButton_pressed():
     get_tree().change_scene("res://Level1.tscn")

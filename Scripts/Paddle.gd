@@ -32,6 +32,8 @@ signal leaving
 #ustawienie kijka na pozycji początkowej, i wyświetlenie go
 func start(pos):
     position = pos
+    victory=false
+    stay=true
     show()
 #powrót na pozycję początkową i reset ulepszeń do zera
 func reset():
@@ -54,7 +56,7 @@ func power_up(value):
         if stay:
             r_margin=screen_size.x-l_margin
         else:
-            r_margin=screen_size-margin
+            r_margin=screen_size.x-margin
     elif value==2: #shooting
         $Shooting.show()
         $Normal.hide()

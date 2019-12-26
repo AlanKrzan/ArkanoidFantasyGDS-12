@@ -9,7 +9,7 @@ extends "res://Scripts/BaseLevel.gd"
 #ustawienie elementów gry do rozgrywki
 func _ready():
     randomize()
-    populate_map("res://data/level2.json")
+    populate_map("res://data/level3.json")
     $Hud.update_score(Global.score)
     upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
     + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
@@ -99,4 +99,4 @@ func _on_Bottom_redo():
 
 func _on_WinTimer_timeout():
     emit_signal("purge")
-    get_tree().change_scene("res://Level3.tscn")
+    get_tree().change_scene("res://MainMenu.tscn")

@@ -4,11 +4,12 @@ extends "res://Scripts/BaseLevel.gd"
 
 #funkcje importowane z BaseLevel.gd: new_game, _spawn_ball, _add_life, _powerup_list, _spawn_check, _spawn_enemy,
 # _leaving, _process, _extra_balls, _enable_enemy, __rand_sample, _on_SpeedUpTimer_timeout, _on_EscapeTimer_timeout,
-# _on_AnimatedSprite_animation_finished
+# _on_AnimatedSprite_animation_finished, 
 
 #ustawienie elementów gry do rozgrywki
 func _ready():
     randomize()
+    populate_map("res://data/level1.json")
     Global.score=0
     Global.life=3
     $Hud.update_score(Global.score)

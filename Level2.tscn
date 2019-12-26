@@ -1,51 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Level2.gd" type="Script" id=2]
-[ext_resource path="res://WhiteBlock.tscn" type="PackedScene" id=3]
 
 [node name="Level1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+extend_powerup_count = 2
+fire_powerup_count = 2
+sticky_count = 2
+win_powerup_count = 2
+extra_balls_powerup_count = 2
 level = 2
 
 [node name="StartPosition" parent="." index="0"]
 position = Vector2( 400, 990 )
 
-[node name="Paddle" parent="." index="1"]
+[node name="Paddle" parent="." index="3"]
 self_modulate = Color( 0.666667, 0.160784, 0.160784, 1 )
 
 [node name="WinTimer" type="Timer" parent="." index="10"]
 wait_time = 5.0
-
-[node name="WhiteBlock" parent="." index="11" instance=ExtResource( 3 )]
-position = Vector2( 85, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock2" parent="." index="12" instance=ExtResource( 3 )]
-position = Vector2( 165, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock3" parent="." index="13" instance=ExtResource( 3 )]
-position = Vector2( 245, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock4" parent="." index="14" instance=ExtResource( 3 )]
-position = Vector2( 325, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock5" parent="." index="15" instance=ExtResource( 3 )]
-position = Vector2( 485, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock6" parent="." index="16" instance=ExtResource( 3 )]
-position = Vector2( 565, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock7" parent="." index="17" instance=ExtResource( 3 )]
-position = Vector2( 645, 67.5 )
-collision_mask = 1
-
-[node name="WhiteBlock8" parent="." index="18" instance=ExtResource( 3 )]
-position = Vector2( 725, 67.5 )
-collision_mask = 1
 [connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]

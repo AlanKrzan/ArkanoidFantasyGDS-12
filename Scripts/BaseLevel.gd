@@ -32,6 +32,19 @@ func new_game():
     $Hud.hide_message()
     $SpeedUpTimer.start()
 
+func populate_map(filename):
+    var file = File.new()
+    file.open(filename, file.READ)
+    var json = file.get_as_text()
+    var json_result = JSON.parse(json).result
+    file.close()
+    for i in range(json_result.size()):
+        for j in range(json_result[i].size()):
+            if json_result[i][j] in Global.Blocks:
+                var block = Global.Blocks[json_result[i][j]].instance()
+                block.start(Vector2(85+80*j,65+40*i))
+                add_child(block)
+                
 func _spawn_ball():
     var c = Global.Ball.instance()
     c.start(($Paddle.position+Vector2(0,-30)))
@@ -41,7 +54,7 @@ func _spawn_ball():
     self.connect("die",c,"die")
     self.connect("purge",c,"die")
     $Paddle.connect("half_speed",c,"_half")
-    get_parent().add_child(c)
+    add_child(c)
 
 
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Block.tscn" type="PackedScene" id=1]
-[ext_resource path="res://art/brick_yellow.jpg" type="Texture" id=2]
+[ext_resource path="res://art/zolty goblin block.png" type="Texture" id=2]
 
 [node name="YellowBlock" instance=ExtResource( 1 )]
 score = 120

@@ -9,6 +9,9 @@ var power_up=null
 #funkcja zwracająca wynik i niszcząca bloczek
 func death():
     queue_free()
+    
+func start(pos):
+    position=pos
 
 func hit():
     if lives>0:

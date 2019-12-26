@@ -8,6 +8,9 @@ var power_up=null
 func death():
     queue_free()
 
+func start(pos):
+    position=pos
+    
 func hit():
     emit_signal("points",_get_score(),true)
     if power_up != null:

@@ -9,6 +9,7 @@ func _ready():
 func _on_Exit_pressed():
     get_tree().quit()
 
+#warning-ignore:unused_argument
 func _process(delta):
     if Input.is_action_just_released("ui_select"): 
         _on_PlayButton_pressed()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=1]
-[ext_resource path="res://art/brick_gold.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/GoldenBlock.gd" type="Script" id=2]
+[ext_resource path="res://art/brick_gold.jpg" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 22.5 )
@@ -12,9 +13,10 @@ extents = Vector2( 40, 22.5 )
 collision_layer = 3
 collision_mask = 3
 physics_material_override = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

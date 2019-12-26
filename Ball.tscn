@@ -11,7 +11,7 @@ extents = Vector2( 5, 5 )
 ]]
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
-speed = 300
+speed = 350
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

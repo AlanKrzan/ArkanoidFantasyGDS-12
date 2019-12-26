@@ -18,6 +18,7 @@ export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 doda
 export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
 export var level=1                      #obecny poziom gry
 var extra_balls=0                       #ilosc dodatkowych piłek
+var closed=true
 signal stop                             #sygnały wysyłane do reszty kodu
 signal move
 signal purge
@@ -146,6 +147,10 @@ func __rand_sample(n,list):
         sample.append(list[x])
         list.remove(x)
     return sample
+    
+func _exit_open_play():
+    if closed:
+        $Right/AnimatedSprite.play()
 
 #funkcja podnosząca prędkość piłki, co SpeedUpTimer
 func _on_SpeedUpTimer_timeout():

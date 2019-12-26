@@ -69,8 +69,9 @@ func power_up(value):
     elif value==5:
         emit_signal("extraLife")
     elif value==6:
-        stay=false
+        stay=false                    #early exit
         r_margin=screen_size.x-margin
+        parent._exit_open_play()
     elif value==7:
         emit_signal("half_speed")
         
@@ -191,3 +192,5 @@ func _process(delta):
         if position.x>=screen_size.x-5 and not victory:
             emit_signal("win")
             victory=true
+            if parent.has_method("_get_points"):
+                parent._get_points(10000,false)

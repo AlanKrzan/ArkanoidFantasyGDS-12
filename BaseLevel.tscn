@@ -1,28 +1,40 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Edge.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Paddle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://art/ball.png" type="Texture" id=4]
-[ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=5]
-[ext_resource path="res://art/gate0.png" type="Texture" id=6]
-[ext_resource path="res://art/gate1.png" type="Texture" id=7]
-[ext_resource path="res://art/gate2.png" type="Texture" id=8]
-[ext_resource path="res://Scripts/Bottom.gd" type="Script" id=9]
-[ext_resource path="res://Hud.tscn" type="PackedScene" id=10]
+[ext_resource path="res://art/exit0.png" type="Texture" id=3]
+[ext_resource path="res://art/exit1.png" type="Texture" id=4]
+[ext_resource path="res://art/exit2.png" type="Texture" id=5]
+[ext_resource path="res://art/exit3.png" type="Texture" id=6]
+[ext_resource path="res://Paddle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://art/ball.png" type="Texture" id=8]
+[ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=9]
+[ext_resource path="res://art/gate0.png" type="Texture" id=10]
+[ext_resource path="res://art/gate1.png" type="Texture" id=11]
+[ext_resource path="res://art/gate2.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/Bottom.gd" type="Script" id=13]
+[ext_resource path="res://Hud.tscn" type="PackedScene" id=14]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "opening",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 360, 22.5 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "open",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 360, 40 )
 
 [node name="World" type="Node2D"]
@@ -41,47 +53,52 @@ position = Vector2( 22, 540 )
 [node name="Right" parent="." instance=ExtResource( 2 )]
 position = Vector2( 788, 540 )
 
-[node name="Paddle" parent="." instance=ExtResource( 3 )]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Right"]
+position = Vector2( 0, 495 )
+frames = SubResource( 1 )
+animation = "opening"
+
+[node name="Paddle" parent="." instance=ExtResource( 7 )]
 position = Vector2( 0, 0 )
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )
-texture = ExtResource( 4 )
+texture = ExtResource( 8 )
 
 [node name="Top" type="StaticBody2D" parent="." groups=[
 "Top",
 ]]
 position = Vector2( 405, 22 )
 collision_layer = 3
-physics_material_override = ExtResource( 5 )
+physics_material_override = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="SpawnPosition" type="Position2D" parent="Top"]
 position = Vector2( 0, 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Top"]
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 animation = "open"
 
 [node name="Bottom" type="Area2D" parent="."]
 position = Vector2( 405, 1040 )
 collision_mask = 31
-script = ExtResource( 9 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
-[node name="Hud" parent="." instance=ExtResource( 10 )]
+[node name="Hud" parent="." instance=ExtResource( 14 )]
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true

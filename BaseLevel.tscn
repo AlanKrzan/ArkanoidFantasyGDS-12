@@ -108,9 +108,29 @@ wait_time = 5.0
 
 [node name="EscapeTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="HighscorePopup" type="AcceptDialog" parent="."]
+visible = true
+margin_left = 321.0
+margin_top = 281.0
+margin_right = 515.0
+margin_bottom = 380.0
+popup_exclusive = true
+window_title = "New Highscore!"
+dialog_text = "Enter your name here:"
+dialog_hide_on_ok = false
+
+[node name="LineEdit" type="LineEdit" parent="HighscorePopup"]
+margin_left = 8.0
+margin_top = 22.0
+margin_right = 186.0
+margin_bottom = 63.0
 [connection signal="animation_finished" from="Top/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="area_entered" from="Bottom" to="Bottom" method="_on_Bottom_area_entered"]
 [connection signal="body_entered" from="Bottom" to="Bottom" method="_on_Bottom_body_entered"]
 [connection signal="redo" from="Bottom" to="." method="_on_Bottom_redo"]
 [connection signal="timeout" from="SpeedUpTimer" to="." method="_on_SpeedUpTimer_timeout"]
 [connection signal="timeout" from="EscapeTimer" to="." method="_on_EscapeTimer_timeout"]
+[connection signal="confirmed" from="HighscorePopup" to="." method="_on_HighscorePopup_confirmed"]
+[connection signal="popup_hide" from="HighscorePopup" to="." method="_on_HighscorePopup_popup_hide"]

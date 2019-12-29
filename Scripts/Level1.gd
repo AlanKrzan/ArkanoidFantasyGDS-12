@@ -10,17 +10,21 @@ extends "res://Scripts/BaseLevel.gd"
 func _ready():
     randomize()
     populate_map("res://data/level1.json")
+    $Paddle.start($StartPosition.position)
+    self.connect("stop",$Paddle,"_stop_movement")
+    self.connect("move",$Paddle,"_start_movement")
     Global.score=0
     Global.life=3
     $Hud.update_score(Global.score)
+    if Global.check_if_score_higher():
+        $Hud.update_highscore(0)
+    else:
+        $Hud.update_highscore(Global.highscore)
     upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
     + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
-    $Paddle.start($StartPosition.position)
     var blocks = get_tree().get_nodes_in_group("Block")
     blocks_left = blocks.size()
-    spawn_trigger_value = blocks_left*0.75
-    self.connect("stop",$Paddle,"_stop_movement")
-    self.connect("move",$Paddle,"_start_movement")
+    spawn_trigger_value = blocks_left#*0.75
     for block in blocks:
         if block.has_method("set_level"):
             block.set_level(level)
@@ -42,6 +46,10 @@ func _ready():
 func _get_points(points,is_block):
     Global.score+=points
     $Hud.update_score(Global.score)
+    if Global.check_if_score_higher() and not Global.newBest:
+        Global.set_bestscore(Global.score)
+        $Hud.update_highscore(0)
+        $Hud.show_message("New record")
     if is_block:
         blocks_left -= 1
         if blocks_left==1:
@@ -55,40 +63,13 @@ func _get_points(points,is_block):
     if _spawn_check():
         $Top/AnimatedSprite.play("")
 
-
 #funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():
     emit_signal("stop")
     $Hud.show_message("Victory")
     $WinTimer.start()
 
-#funkcja przegrania gry, powrót do menu po czasie
-func _game_over():
-    emit_signal("stop")
-    Global.score=0
-    $Hud.show_message("GAME OVER")
-    $EscapeTimer.start()
-
-
-
-#funkcja ucieczki piłki, sprawdzanie warunku porażki
-func _on_Bottom_redo():
-    if extra_balls>0:
-        extra_balls-=1
-    else:
-        life-=1
-        $Hud.update_life(life)
-        if life>0:
-            emit_signal("stop")
-            emit_signal("die")
-            $Paddle.reset()
-            $Paddle/BallDummy.show()
-            $Hud.show_message("Press SPACE to start")
-            $Paddle.start($StartPosition.position)
-            started=false
-        else:
-            _game_over()
-
 func _on_WinTimer_timeout():
     emit_signal("purge")
     get_tree().change_scene("res://Level2.tscn")
+

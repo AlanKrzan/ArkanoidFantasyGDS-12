@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 export var speed = 200
+export var acceleration = 0.02
 var on=true
 var velocity = Vector2()
 var oldVelocity
@@ -14,8 +15,8 @@ func start(pos,vel=Vector2(speed, -speed)):
     position = pos
     velocity = vel
 
-func accelerate(a):
-    velocity*=1+a
+func accelerate():
+    velocity*=1+acceleration
 
 func stop_movement():
     on=false

@@ -11,6 +11,10 @@ func _ready():
     randomize()
     populate_map("res://data/level3.json")
     $Hud.update_score(Global.score)
+    if Global.check_if_score_higher():
+        $Hud.update_highscore(0)
+    else:
+        $Hud.update_highscore(Global.highscore)
     upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
     + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
     $Paddle.start($StartPosition.position)
@@ -40,6 +44,10 @@ func _ready():
 func _get_points(points,is_block):
     Global.score+=points
     $Hud.update_score(Global.score)
+    if Global.check_if_score_higher() and not Global.newBest:
+        Global.set_bestscore(Global.score)
+        $Hud.update_highscore(0)
+        $Hud.show_message("New record")
     if is_block:
         blocks_left -= 1
         if blocks_left==1:
@@ -60,12 +68,6 @@ func _win():
     $Hud.show_message("Victory")
     $WinTimer.start()
 
-#funkcja przegrania gry, powrót do menu po czasie
-func _game_over():
-    emit_signal("stop")
-    Global.score=0
-    $Hud.show_message("GAME OVER")
-    $EscapeTimer.start()
 
 #warning-ignore:unused_argument
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
@@ -75,25 +77,6 @@ func _process(delta):
     if Input.is_action_just_pressed("ui_cancel"):
         emit_signal("purge")
         get_tree().change_scene("res://MainMenu.tscn")
-
-
-#funkcja ucieczki piłki, sprawdzanie warunku porażki
-func _on_Bottom_redo():
-    if extra_balls>0:
-        extra_balls-=1
-    else:
-        life-=1
-        $Hud.update_life(life)
-        if life>0:
-            emit_signal("stop")
-            emit_signal("die")
-            $Paddle.reset()
-            $Paddle/BallDummy.show()
-            $Hud.show_message("Press SPACE to start")
-            $Paddle.start($StartPosition.position)
-            started=false
-        else:
-            _game_over()
 
 
 

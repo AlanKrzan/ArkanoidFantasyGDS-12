@@ -151,19 +151,61 @@ func __rand_sample(n,list):
 func _exit_open_play():
     if closed:
         $Right/AnimatedSprite.play()
+        closed=false
+
+#funkcja ucieczki piłki, sprawdzanie warunku porażki
+func _on_Bottom_redo():
+    if extra_balls>0:
+        extra_balls-=1
+    else:
+        life-=1
+        $Hud.update_life(life)
+        if life>0:
+            emit_signal("stop")
+            emit_signal("die")
+            $Paddle.reset()
+            $Paddle/BallDummy.show()
+            $Hud.show_message("Press SPACE to start")
+            $Paddle.start($StartPosition.position)
+            started=false
+        else:
+            _game_over()
+
+#funkcja przegrania gry, powrót do menu po czasie
+func _game_over():
+    emit_signal("stop")
+    $Hud.show_message("GAME OVER")
+    $EscapeTimer.start()
 
 #funkcja podnosząca prędkość piłki, co SpeedUpTimer
 func _on_SpeedUpTimer_timeout():
     var balls = get_tree().get_nodes_in_group("Ball")
     for ball in balls:
-        ball.accelerate(0.02)
+        ball.accelerate()
 
 #funkcja powracająca do Menu po upływie czasu
 func _on_EscapeTimer_timeout():
-    emit_signal("purge")
-    get_tree().change_scene("res://MainMenu.tscn")
+    if Global.checkScore():
+        $HighscorePopup.popup_centered()
+    else:
+        Global.life=3
+        Global.score=0
+        emit_signal("purge")
+        get_tree().change_scene("res://MainMenu.tscn")       
 
 #funkcja wywołująca przeciwnika po animacji otwierania
 func _on_AnimatedSprite_animation_finished():
     _spawn_enemy()
     $Top/AnimatedSprite.stop()
+    
+func _on_HighscorePopup_confirmed():
+    var name = $HighscorePopup/LineEdit.get_text()
+    if name.length()>0:
+        Global.insertScore(name)
+        get_tree().change_scene("res://HighScores.tscn")
+    else:
+        $HighscorePopup.set_text("Please, enter your name here:")
+
+
+func _on_HighscorePopup_popup_hide():
+    get_tree().change_scene("res://MainMenu.tscn")

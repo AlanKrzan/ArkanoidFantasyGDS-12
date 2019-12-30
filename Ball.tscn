@@ -1,10 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Ball.gd" type="Script" id=1]
 [ext_resource path="res://art/ball.png" type="Texture" id=2]
+[ext_resource path="res://art/ogien15x15(2)/frame0000.png" type="Texture" id=3]
+[ext_resource path="res://art/ogien15x15(2)/frame0001.png" type="Texture" id=4]
+[ext_resource path="res://art/ogien15x15(2)/frame0002.png" type="Texture" id=5]
+[ext_resource path="res://art/ogien15x15(2)/frame0003.png" type="Texture" id=6]
+[ext_resource path="res://art/ogien15x15(2)/frame0004.png" type="Texture" id=7]
+[ext_resource path="res://art/ogien15x15(2)/frame0005.png" type="Texture" id=8]
+[ext_resource path="res://art/ogien15x15(2)/frame0006.png" type="Texture" id=9]
+[ext_resource path="res://art/ogien15x15(2)/frame0007.png" type="Texture" id=10]
+[ext_resource path="res://art/ogien15x15(2)/frame0008.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 5 )
+extents = Vector2( 7.5, 7.5 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "fire",
+"speed": 24.0
+} ]
 
 [node name="Ball" type="KinematicBody2D" groups=[
 "Ball",
@@ -14,12 +31,18 @@ script = ExtResource( 1 )
 speed = 350
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -0.0356483 )
+rect = Rect2( -8, -8, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -0.0356483 )
-rect = Rect2( -7, -7, 14, 14 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "fire"
+offset = Vector2( -0.5, -0.5 )
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -125,7 +125,7 @@ func _extra_balls():
     for ball in balls:
         for i in range(2):
             var c = Global.Ball.instance()
-            c.start(ball.position,ball.velocity.rotated(deg2rad(120+120*i)))
+            c.start(ball.position,ball.velocity.rotated(-deg2rad(90+120*i)))
             self.connect("stop",c,"stop_movement")
             self.connect("die",c,"die")
             self.connect("purge",c,"die")

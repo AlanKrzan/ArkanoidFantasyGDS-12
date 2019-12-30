@@ -5,7 +5,7 @@ export var speed = 200
 export var acceleration = 0.02
 var on=true
 var velocity = Vector2()
-var oldVelocity
+var newVelocity
 var host
 var l_margin
 var r_margin
@@ -14,6 +14,8 @@ var r_margin
 func start(pos,vel=Vector2(speed, -speed)):
     position = pos
     velocity = vel
+    $AnimatedSprite.play()
+    rotate(-vel.angle())
 
 func accelerate():
     velocity*=1+acceleration
@@ -30,6 +32,7 @@ func _physics_process(delta):
     if on:
         var collision = move_and_collide(velocity * delta)
         if collision:
+            var oldVelocity=velocity
             if collision.collider.has_method("hit"):
                 collision.collider.hit()
             var motion = collision.remainder.bounce(collision.normal)
@@ -43,15 +46,20 @@ func _physics_process(delta):
                         l_margin=host.edge_size+host.paddle_width-(host.position.x-position.x)
                         r_margin=get_viewport_rect().size.x-host.edge_size-(host.position.x+host.paddle_width-position.x)
                         on=false
-                        oldVelocity = movements[1]
+                        newVelocity = movements[1]
+                        $AnimatedSprite.stop()
+                        rotate(-newVelocity.angle_to(oldVelocity))
                     else:
                         move_and_collide(movements[0]*delta)
                         velocity = movements[1]
+                        rotate(-velocity.angle_to(oldVelocity))
                 else:
                     velocity = velocity.bounce(collision.normal)
+                    rotate(-velocity.angle_to(oldVelocity))
                     collision=move_and_collide(motion)
             else:
                 velocity = velocity.bounce(collision.normal)
+                rotate(-velocity.angle_to(oldVelocity))
                 collision=move_and_collide(motion)
 
 func _on_VisibilityNotifier2D_screen_exited():
@@ -62,7 +70,8 @@ func _move(how_much):
 
 func _disconnect():
     on=true
-    velocity=oldVelocity
+    $AnimatedSprite.play()
+    velocity=newVelocity
     host.disconnect("follow",self,"_move")
     host.disconnect("disconnect",self,"_disconnect")
     host=null

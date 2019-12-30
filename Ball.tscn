@@ -26,6 +26,7 @@ animations = [ {
 [node name="Ball" type="KinematicBody2D" groups=[
 "Ball",
 ]]
+collision_layer = 2
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
 speed = 350

@@ -2,6 +2,7 @@ extends Node2D
 
 
 func _ready():
+    $Button.grab_focus()
     for i in range(10):
         var text =str(Global.scores[i]['score'])+" "
         while len(text)<8:

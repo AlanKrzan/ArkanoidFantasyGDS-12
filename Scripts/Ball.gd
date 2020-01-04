@@ -22,6 +22,8 @@ func accelerate():
 
 func stop_movement():
     on=false
+func restart_movement():
+    on=true
 
 #funkcja do zabicia piłki    
 func die():

@@ -2,3 +2,4 @@
 /.mono
 /art/*.import
 /art/*/*.import
+/fonts/*.import

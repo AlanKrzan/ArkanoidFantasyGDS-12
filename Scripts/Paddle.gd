@@ -19,6 +19,7 @@ var on=false
 const north=Vector2(0,-1)
 var victory=false
 var stay=true
+var remain=true
 var angles_array=[-40,-25,-10,10,25,40]
 var parent=get_parent()
 signal extraLife
@@ -28,6 +29,7 @@ signal win
 signal extraBalls
 signal half_speed
 signal leaving
+signal start
 
 #ustawienie kijka na pozycji początkowej, i wyświetlenie go
 func start(pos):
@@ -151,10 +153,12 @@ func _ready():
 # funkcja dla sygnału rozpoczynającego grę
 func _start_movement():
     on=true
+    remain = true
     
 # funkcja dla sygnału zatrzymującego grę
 func _stop_movement():
     on=false
+    remain = false
 
 # obsluga poruszania się
 func _process(delta):
@@ -162,9 +166,9 @@ func _process(delta):
         reloading-=delta
         var velocity = 0  # The paddle movement value.
         if Input.is_action_pressed("ui_right"):
-            velocity = 1
+            velocity += 1
         if Input.is_action_pressed("ui_left"):
-            velocity = -1
+            velocity += -1
         if velocity != 0:
             velocity = velocity * speed * delta
             var newpos = position.x + velocity
@@ -181,13 +185,15 @@ func _process(delta):
             elif upgrade==2:
                 if reloading <=0.0:
                     var b = Bullet.instance()
-                    b.start(position+Vector2(0,-30))
+                    b.start(position+Vector2(0,-20))
                     parent.connect("stop",b,"_stop_movement")
+                    parent.connect("leaving_stop",b,"_stop_movement")
+                    parent.connect("move",b,"_restart_movement")
                     parent.connect("purge",b,"_die")
                     parent.connect("die",b,"_die")
                     parent.add_child(b)
                     reloading = reload_time
-    elif stay==false:
+    elif stay==false and remain:
         position.x+=exit_speed*delta
         if position.x>=screen_size.x-5 and not victory:
             emit_signal("win")

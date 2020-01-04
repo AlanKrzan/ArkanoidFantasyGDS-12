@@ -3,9 +3,13 @@ extends KinematicBody2D
 export var speed=200
 var velocity=Vector2(0,-speed)
 var on=true
+var living=true
 
 func _stop_movement():
     on=false
+
+func _restart_movement():
+    on=true
 
 func start(pos):
      position=pos
@@ -16,10 +20,15 @@ func _physics_process(delta):
         if collision:
             if collision.collider.has_method("hit"):
                 collision.collider.hit()
-                queue_free()
+                _die()
             elif collision.collider.is_in_group("Top"):
-                queue_free()
+                _die()
     
 func _die():
-    queue_free()
+    if living:
+        living=false
+        $DeathTimer.start()
         
+
+func _on_DeathTimer_timeout():
+    queue_free()

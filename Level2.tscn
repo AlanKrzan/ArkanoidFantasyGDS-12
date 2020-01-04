@@ -5,17 +5,12 @@
 
 [node name="Level1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-extend_powerup_count = 2
-fire_powerup_count = 2
-sticky_count = 2
-win_powerup_count = 2
-extra_balls_powerup_count = 2
 level = 2
 
-[node name="StartPosition" parent="." index="0"]
+[node name="StartPosition" parent="." index="1"]
 position = Vector2( 400, 990 )
 
-[node name="Paddle" parent="." index="3"]
+[node name="Paddle" parent="." index="5"]
 self_modulate = Color( 0.666667, 0.160784, 0.160784, 1 )
 
 [node name="WinTimer" type="Timer" parent="." index="10"]

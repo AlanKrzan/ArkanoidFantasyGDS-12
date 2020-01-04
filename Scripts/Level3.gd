@@ -9,6 +9,7 @@ extends "res://Scripts/BaseLevel.gd"
 #ustawienie elementów gry do rozgrywki
 func _ready():
     randomize()
+    Hud_signals()
     populate_map("res://data/level3.json")
     $Hud.update_score(Global.score)
     if Global.check_if_score_higher():
@@ -64,20 +65,10 @@ func _get_points(points,is_block):
 
 #funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():
-    emit_signal("stop")
+    emit_signal("leaving_stop")
+    menu=false
     $Hud.show_message("Victory")
     $WinTimer.start()
-
-
-#warning-ignore:unused_argument
-#wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
-func _process(delta):
-    if Input.is_action_pressed("ui_select") and !started:
-        new_game()
-    if Input.is_action_just_pressed("ui_cancel"):
-        emit_signal("purge")
-        get_tree().change_scene("res://MainMenu.tscn")
-
 
 
 func _on_WinTimer_timeout():

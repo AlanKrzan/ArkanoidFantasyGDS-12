@@ -1,10 +1,30 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://BasePowerUp.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/WinPowerUp.gd" type="Script" id=2]
+[ext_resource path="res://art/poweruppink/frame0000.png" type="Texture" id=3]
+[ext_resource path="res://art/poweruppink/frame0001.png" type="Texture" id=4]
+[ext_resource path="res://art/poweruppink/frame0002.png" type="Texture" id=5]
+[ext_resource path="res://art/poweruppink/frame0003.png" type="Texture" id=6]
+[ext_resource path="res://art/poweruppink/frame0004.png" type="Texture" id=7]
+[ext_resource path="res://art/poweruppink/frame0005.png" type="Texture" id=8]
+[ext_resource path="res://art/poweruppink/frame0006.png" type="Texture" id=9]
 
-[node name="WinPowerUp" instance=ExtResource( 1 )]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 16.0
+} ]
+
+[node name="WinPowerUp" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="ColorRect" parent="." index="1"]
+visible = false
 color = Color( 1, 0, 1, 1 )
+
+[node name="AnimatedSprite" parent="." index="3"]
+frames = SubResource( 1 )
+frame = 1

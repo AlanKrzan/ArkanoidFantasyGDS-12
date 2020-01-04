@@ -19,7 +19,9 @@ export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
 export var level=1                      #obecny poziom gry
 var extra_balls=0                       #ilosc dodatkowych piłek
 var closed=true
+var menu=true
 signal stop                             #sygnały wysyłane do reszty kodu
+signal leaving_stop
 signal move
 signal purge
 signal die
@@ -52,6 +54,8 @@ func _spawn_ball():
     if extra_balls==0:
         $Paddle/BallDummy.hide()
     self.connect("stop",c,"stop_movement")
+    self.connect("leaving_stop",c,"stop_movement")
+    self.connect("move",c,"restart_movement")
     self.connect("die",c,"die")
     self.connect("purge",c,"die")
     $Paddle.connect("half_speed",c,"_half")
@@ -91,8 +95,9 @@ func _spawn_enemy():
     if _spawn_check():
         spawn_permission=false
         var e = Global.Enemy.instance()
-        e.start(($Top/SpawnPosition.get_global_transform_with_canvas().get_origin()))
+        e.start(($Top/AnimatedSprite/SpawnPosition.get_global_transform_with_canvas().get_origin()))
         self.connect("stop",e,"stop_movement")
+        self.connect("leaving_stop",e,"stop_movement")
         self.connect("purge",e,"die")
         self.connect("die",e,"die")
         self.connect("move",e,"restart_movement")
@@ -102,9 +107,8 @@ func _spawn_enemy():
 
         
 func _leaving():
-    emit_signal("stop")
+    emit_signal("leaving_stop")
     $Hud.show_message("Leaving")
-
 
 
 #warning-ignore:unused_argument
@@ -112,9 +116,8 @@ func _leaving():
 func _process(delta):
     if Input.is_action_pressed("ui_select") and !started:
         new_game()
-    if Input.is_action_just_released("ui_cancel"):
-        emit_signal("purge")
-        get_tree().change_scene("res://MainMenu.tscn")
+    if Input.is_action_just_released("ui_cancel") and menu:
+        $Hud. open_pause_menu()
 
 
 
@@ -127,6 +130,8 @@ func _extra_balls():
             var c = Global.Ball.instance()
             c.start(ball.position,ball.velocity.rotated(-deg2rad(90+120*i)))
             self.connect("stop",c,"stop_movement")
+            self.connect("leaving_stop",c,"stop_movement")
+            self.connect("move",c,"restart_movement")
             self.connect("die",c,"die")
             self.connect("purge",c,"die")
             $Paddle.connect("half_speed",c,"_half")
@@ -150,7 +155,7 @@ func __rand_sample(n,list):
     
 func _exit_open_play():
     if closed:
-        $Right/AnimatedSprite.play()
+        $Right/ExitAnimatedSprite.play()
         closed=false
 
 #funkcja ucieczki piłki, sprawdzanie warunku porażki
@@ -175,7 +180,20 @@ func _on_Bottom_redo():
 func _game_over():
     emit_signal("stop")
     $Hud.show_message("GAME OVER")
+    menu=false
     $EscapeTimer.start()
+    
+func stop_movement():
+    emit_signal("stop")
+func start_movement():
+    emit_signal("move")
+func purge_stuff():
+    emit_signal("purge")
+
+func Hud_signals():
+    $Hud.connect("stop",self,"stop_movement")
+    $Hud.connect("move",self,"start_movement")
+    $Hud.connect("purge",self,"purge_stuff")
 
 #funkcja podnosząca prędkość piłki, co SpeedUpTimer
 func _on_SpeedUpTimer_timeout():

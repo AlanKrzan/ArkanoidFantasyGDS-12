@@ -9,6 +9,7 @@ extends "res://Scripts/BaseLevel.gd"
 #ustawienie elementów gry do rozgrywki
 func _ready():
     randomize()
+    Hud_signals()
     populate_map("res://data/level1.json")
     $Paddle.start($StartPosition.position)
     self.connect("stop",$Paddle,"_stop_movement")
@@ -24,7 +25,7 @@ func _ready():
     + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
     var blocks = get_tree().get_nodes_in_group("Block")
     blocks_left = blocks.size()
-    spawn_trigger_value = blocks_left#*0.75
+    spawn_trigger_value = blocks_left*0.75
     for block in blocks:
         if block.has_method("set_level"):
             block.set_level(level)
@@ -65,8 +66,9 @@ func _get_points(points,is_block):
 
 #funckja zwycięstwa TODO zmienić scenę na następny poziom, jak już będzie
 func _win():
-    emit_signal("stop")
+    emit_signal("leaving_stop")
     $Hud.show_message("Victory")
+    menu=false
     $WinTimer.start()
 
 func _on_WinTimer_timeout():

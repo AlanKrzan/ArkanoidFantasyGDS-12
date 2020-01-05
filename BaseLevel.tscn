@@ -147,7 +147,7 @@ animation = "opening"
 
 [node name="Paddle" parent="." instance=ExtResource( 43 )]
 position = Vector2( 0, 0 )
-paddle_speed = 1000
+paddle_speed = 800
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )

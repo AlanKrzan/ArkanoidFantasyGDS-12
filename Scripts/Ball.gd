@@ -79,4 +79,4 @@ func _disconnect():
     host=null
     
 func _half():
-    velocity*=0.5
+    velocity*=0.7

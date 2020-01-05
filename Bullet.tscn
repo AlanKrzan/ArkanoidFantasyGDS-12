@@ -9,7 +9,7 @@
 [ext_resource path="res://art/strzal/frame0005.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 12 )
+extents = Vector2( 40, 10 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -20,6 +20,7 @@ animations = [ {
 } ]
 
 [node name="Bullet" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
 collision_layer = 0
 collision_mask = 14
 script = ExtResource( 1 )
@@ -32,6 +33,6 @@ wait_time = 0.01
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 4
+frame = 1
 playing = true
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

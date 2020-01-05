@@ -5,9 +5,9 @@ export var margin=60
 export var edge_size=45
 var l_margin
 var r_margin
-export var paddle_speed = 500  # How fast the player will move (pixels/sec).
+export var paddle_speed = 800  # How fast the player will move 
 export var paddle_width = 60
-export var reload_time = 0.1
+export var reload_time = 1
 var reloading=0
 var screen_size # Size of the game window.
 onready var initial_pos = self.position

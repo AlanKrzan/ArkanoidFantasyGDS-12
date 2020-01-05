@@ -20,6 +20,7 @@ func _ready():
     get_parent().connect("leaving_stop",self,"stop_movement")
     get_parent().connect("move",self,"restart_movement")
     get_parent().connect("stop",self,"stop_movement")
+    $DropSound.play()
 
 func restart_movement():
     on=true

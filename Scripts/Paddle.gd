@@ -48,6 +48,7 @@ func power_up(value):
         _reset_power()
     print("power up:"+str(value))
     if value==1:    #extend
+        $ExtendSound.play()
         upgrade=1
         $Normal.hide()
         var shape = $CollisionShape2D.get_shape()
@@ -60,21 +61,27 @@ func power_up(value):
         else:
             r_margin=screen_size.x-margin
     elif value==2: #shooting
+        $OtherPowerUpSound.play()
         $Shooting.show()
         $Normal.hide()
         upgrade=2
     elif value==3: #sticky
+        $PowerUpSound.play()
         upgrade=3
     elif value==4: #Multiplication
+        $PowerUpSound.play()
         upgrade=4
         emit_signal("extraBalls")
     elif value==5:
+        $LifePowerUpSound.play()
         emit_signal("extraLife")
     elif value==6:
+        $OtherPowerUpSound.play()
         stay=false                    #early exit
         r_margin=screen_size.x-margin
         parent._exit_open_play()
     elif value==7:
+        $OtherPowerUpSound.play()
         emit_signal("half_speed")
         
 

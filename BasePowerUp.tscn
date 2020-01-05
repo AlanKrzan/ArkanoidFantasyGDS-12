@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/BasePowerUp.gd" type="Script" id=1]
+[ext_resource path="res://sound/power_up_drops.wav" type="AudioStream" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22, 22.5 )
@@ -29,5 +30,8 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 playing = true
+
+[node name="DropSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_BasePowerUp_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

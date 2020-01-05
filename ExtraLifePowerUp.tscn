@@ -18,13 +18,12 @@ animations = [ {
 "speed": 16.0
 } ]
 
-[node name="ExtraLifePowerUp" index="0" instance=ExtResource( 1 )]
+[node name="ExtraLifePowerUp" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="ColorRect" parent="." index="1"]
-visible = false
 color = Color( 0.521569, 0.521569, 0.521569, 1 )
 
 [node name="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 1 )
-frame = 6
+frame = 5

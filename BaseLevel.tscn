@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scripts/Level1.gd" type="Script" id=1]
 [ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=2]
@@ -45,6 +45,7 @@
 [ext_resource path="res://art/ball.png" type="Texture" id=43]
 [ext_resource path="res://Scripts/Bottom.gd" type="Script" id=44]
 [ext_resource path="res://Hud.tscn" type="PackedScene" id=45]
+[ext_resource path="res://sound/new_stage_sound.wav" type="AudioStream" id=46]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 360, 22.5 )
@@ -66,26 +67,15 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 360, 40 )
+extents = Vector2( 360, 30 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
-extend_powerup_count = 1
-fire_powerup_count = 1
-extra_life_count = 1
-sticky_count = 1
-win_powerup_count = 1
-extra_balls_powerup_count = 1
-slow_powerup_count = 1
 
 [node name="Background" type="Sprite" parent="."]
 
 [node name="StartPosition" type="Position2D" parent="."]
-position = Vector2( 400, 996 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+position = Vector2( 400, 1010 )
 
 [node name="Top" type="StaticBody2D" parent="." groups=[
 "Top",
@@ -155,14 +145,14 @@ animation = "opening"
 
 [node name="Paddle" parent="." instance=ExtResource( 42 )]
 position = Vector2( 0, 0 )
-paddle_speed = 650
+paddle_speed = 780
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )
 texture = ExtResource( 43 )
 
 [node name="Bottom" type="Area2D" parent="."]
-position = Vector2( 405, 1040 )
+position = Vector2( 405, 1050 )
 collision_mask = 31
 script = ExtResource( 44 )
 __meta__ = {
@@ -184,6 +174,9 @@ wait_time = 5.0
 [node name="EscapeTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="NewGameSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 46 )
 
 [node name="HighscorePopup" type="AcceptDialog" parent="."]
 visible = true

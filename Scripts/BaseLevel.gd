@@ -9,13 +9,13 @@ var blocks_left=0                       #licznik bloczków
 var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
 var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
 var upgrade_count=0                     #suma ulepszen
-export var extend_powerup_count=3       #ilosc ulepszen poszerzających kijek)
-export var fire_powerup_count=4
-export var extra_life_count=2           #ilosc ulepszen dających dodatkowe życie
-export var sticky_count=3               #ilosc ulepszen "przyklejacych" piłke do kijka
-export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
-export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
-export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
+#export var extend_powerup_count=3       #ilosc ulepszen poszerzających kijek)
+#export var fire_powerup_count=4
+#export var extra_life_count=2           #ilosc ulepszen dających dodatkowe życie
+#export var sticky_count=3               #ilosc ulepszen "przyklejacych" piłke do kijka
+#export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
+#export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
+#export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
 export var level=1                      #obecny poziom gry
 var extra_balls=0                       #ilosc dodatkowych piłek
 var closed=true
@@ -67,24 +67,7 @@ func _add_life():
     life+=1
     $Hud.update_life(life)
 
-#funkcja zwracająca liste ulepszen, TODO: rozszerzyć o więcej ulepszeń
-func _powerup_list():
-    var list=[]
-    for i in range(extend_powerup_count):
-        list.append(Global.Extend)
-    for i in range(sticky_count):
-        list.append(Global.Sticky)
-    for i in range(extra_life_count):
-        list.append(Global.Extra)
-    for i in range(win_powerup_count):
-        list.append(Global.Win)
-    for i in range(extra_balls_powerup_count):
-        list.append(Global.Balls)
-    for i in range(slow_powerup_count):
-        list.append(Global.Slow)
-    for i in range(fire_powerup_count):
-        list.append(Global.Fire)
-    return list
+
 
 #sprawdzanie czy można wywołąć przeciwnika dla animacji
 func _spawn_check():

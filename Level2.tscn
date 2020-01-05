@@ -7,9 +7,6 @@
 script = ExtResource( 2 )
 level = 2
 
-[node name="StartPosition" parent="." index="1"]
-position = Vector2( 400, 990 )
-
 [node name="Paddle" parent="." index="5"]
 self_modulate = Color( 0.666667, 0.160784, 0.160784, 1 )
 

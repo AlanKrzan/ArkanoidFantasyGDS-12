@@ -21,8 +21,8 @@ func _ready():
         $Hud.update_highscore(0)
     else:
         $Hud.update_highscore(Global.highscore)
-    upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
-    + fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
+    #upgrade_count = extend_powerup_count + sticky_count + extra_life_count + win_powerup_count \
+    #+ fire_powerup_count + extra_balls_powerup_count + slow_powerup_count
     var blocks = get_tree().get_nodes_in_group("Block")
     blocks_left = blocks.size()
     spawn_trigger_value = blocks_left*0.75
@@ -37,10 +37,11 @@ func _ready():
         sample=__rand_sample(upgrade_count,blocks)
     else:
         sample=__rand_sample(blocks.size(),blocks)
-    var powerup_list=_powerup_list()
-    for i in range(sample.size()):
-        sample[i].set_power(powerup_list[i])
+    #var powerup_list=_powerup_list()
+    #for i in range(sample.size()):
+    #    sample[i].set_power(powerup_list[i])
     $Hud.show_message("Press SPACE to start")
+    $NewGameSound.play()
 
 #funkcja przyznanie punktów, sprawdzenie warunku zwycięstwa
 #nie przeniesiona nad ponieważ wymaga funkcji zwyciestwa

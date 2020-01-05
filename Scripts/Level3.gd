@@ -10,6 +10,7 @@ extends "res://Scripts/BaseLevel.gd"
 func _ready():
     randomize()
     Hud_signals()
+    $Hud.update_life(Global.life)
     populate_map("res://data/level3.json")
     $Hud.update_score(Global.score)
     if Global.check_if_score_higher():

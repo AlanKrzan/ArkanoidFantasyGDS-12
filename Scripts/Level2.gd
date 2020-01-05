@@ -11,6 +11,7 @@ func _ready():
     randomize()
     Hud_signals()
     populate_map("res://data/level2.json")
+    $Hud.update_life(Global.life)
     $Hud.update_score(Global.score)
     if Global.check_if_score_higher():
         $Hud.update_highscore(0)

@@ -35,7 +35,7 @@ signal start
 func start(pos):
     position = pos
     victory=false
-    stay=true
+    remain=true
     show()
 #powrót na pozycję początkową i reset ulepszeń do zera
 func reset():
@@ -200,7 +200,7 @@ func _process(delta):
                     parent.connect("die",b,"_die")
                     parent.add_child(b)
                     reloading = reload_time
-    elif stay==false and remain:
+    elif not stay and remain:
         position.x+=exit_speed*delta
         if position.x>=screen_size.x-5 and not victory:
             emit_signal("win")

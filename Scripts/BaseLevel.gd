@@ -189,8 +189,6 @@ func _on_EscapeTimer_timeout():
     if Global.checkScore():
         $HighscorePopup.popup_centered()
     else:
-        Global.life=3
-        Global.score=0
         emit_signal("purge")
         get_tree().change_scene("res://MainMenu.tscn")       
 

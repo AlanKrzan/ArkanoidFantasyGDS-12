@@ -2,7 +2,7 @@ extends Node
 #warning-ignore-all:unused_variable
 
 var score=-1
-var life=1
+var life=3
 var Ball = preload("res://Ball.tscn")   #wczytywanie schematu piłki
 var Enemy = preload("res://BaseEnemy.tscn")
 #var Extend = preload("res://ExtendPowerUp.tscn")
@@ -102,5 +102,3 @@ func set_bestscore(new_value):
 func _ready():
     load_highscores()
     highscore = scores[0]['score']
-    life=3
-    score=0

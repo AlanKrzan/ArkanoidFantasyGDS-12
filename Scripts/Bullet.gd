@@ -12,6 +12,7 @@ func _restart_movement():
     on=true
 
 func start(pos):
+     $AnimatedSprite.play()
      position=pos
 
 func _physics_process(delta):

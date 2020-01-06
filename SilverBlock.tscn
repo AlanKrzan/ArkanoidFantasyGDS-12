@@ -5,7 +5,7 @@
 [ext_resource path="res://art/goblin srebrny 2 uderz.png" type="Texture" id=3]
 [ext_resource path="res://art/goblin srebrny.png" type="Texture" id=4]
 
-[node name="SilverBlock" index="0" instance=ExtResource( 1 )]
+[node name="SilverBlock" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]

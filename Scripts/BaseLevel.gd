@@ -4,7 +4,6 @@ extends Node2D
 
 
 var started=false                       #czy rozgrywka się zaczeła?, używana w logice gry
-var life=3                              #inicjalizacja ilości żyć
 var blocks_left=0                       #licznik bloczków
 var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
 var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
@@ -64,8 +63,8 @@ func _spawn_ball():
 
 
 func _add_life():
-    life+=1
-    $Hud.update_life(life)
+    Global.life+=1
+    $Hud.update_life(Global.life)
 
 
 
@@ -147,9 +146,9 @@ func _on_Bottom_redo():
     if extra_balls>0:
         extra_balls-=1
     else:
-        life-=1
-        $Hud.update_life(life)
-        if life>0:
+        Global.life-=1
+        $Hud.update_life(Global.life)
+        if Global.life>0:
             emit_signal("stop")
             emit_signal("die")
             $Paddle.reset()

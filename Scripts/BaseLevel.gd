@@ -167,8 +167,10 @@ func _game_over():
     $EscapeTimer.start()
     
 func stop_movement():
+    $SpeedUpTimer.stop()
     emit_signal("stop")
 func start_movement():
+    $SpeedUpTimer.start()
     emit_signal("move")
 func purge_stuff():
     emit_signal("purge")

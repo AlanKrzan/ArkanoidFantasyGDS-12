@@ -74,5 +74,8 @@ func _win():
 
 
 func _on_WinTimer_timeout():
-    emit_signal("purge")
-    get_tree().change_scene("res://MainMenu.tscn")
+    if Global.checkScore():
+        $HighscorePopup.popup_centered()
+    else:
+        emit_signal("purge")
+        get_tree().change_scene("res://MainMenu.tscn")

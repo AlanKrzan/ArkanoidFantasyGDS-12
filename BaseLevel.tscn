@@ -68,7 +68,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 360, 30 )
+extents = Vector2( 360, 10 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -147,14 +147,13 @@ animation = "opening"
 
 [node name="Paddle" parent="." instance=ExtResource( 43 )]
 position = Vector2( 0, 0 )
-paddle_speed = 800
 
 [node name="BallDummy" type="Sprite" parent="Paddle"]
 position = Vector2( 0, -30 )
 texture = ExtResource( 44 )
 
 [node name="Bottom" type="Area2D" parent="."]
-position = Vector2( 405, 1050 )
+position = Vector2( 405, 1070 )
 collision_mask = 31
 script = ExtResource( 45 )
 __meta__ = {

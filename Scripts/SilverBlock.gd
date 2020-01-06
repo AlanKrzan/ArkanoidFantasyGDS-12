@@ -19,8 +19,8 @@ func hit():
         $Sprite2.hide()
     else:
         emit_signal("points",_get_score(),true)
-        if power_up != null:
-            var c =power_up.instance()
+        if Global.check_power():
+            var c=Global.return_power().instance()
             c.start(position)
             get_parent().add_child(c)
         queue_free()

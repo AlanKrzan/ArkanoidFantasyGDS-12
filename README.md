@@ -2,6 +2,9 @@
 Group 12 project 1. Arkanoid copy
 
 Authors:
-new line
-RobertKopczynski
-AlanKzan
+
+
+- Bartosz Danielak
+- Robert Kopczynski
+- Alan Krzan
+- Ewa Strzelecka

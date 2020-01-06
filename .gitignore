@@ -1,3 +1,6 @@
 /.import
 /.mono
-
+/art/*.import
+/art/*/*.import
+/fonts/*.import
+/sound/*.import

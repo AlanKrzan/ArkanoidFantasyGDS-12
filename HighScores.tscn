@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/HighScores.gd" type="Script" id=1]
+
+[node name="HighScores" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 810.0
+margin_bottom = 1080.0
+color = Color( 0.701961, 0, 0.72549, 1 )
+
+[node name="ItemList" type="ItemList" parent="."]
+margin_left = 295.0
+margin_top = 525.0
+margin_right = 548.0
+margin_bottom = 715.0
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 377.159
+margin_top = 860.115
+margin_right = 460.159
+margin_bottom = 880.115
+text = "Main Menu"
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

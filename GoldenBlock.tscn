@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://bouncing_wall.tres" type="PhysicsMaterial" id=1]
+[ext_resource path="res://Scripts/GoldenBlock.gd" type="Script" id=2]
+[ext_resource path="res://art/skala1.png" type="Texture" id=3]
+[ext_resource path="res://art/skala3.png" type="Texture" id=4]
+[ext_resource path="res://art/skala2.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 20 )
+
+[node name="GoldenBlock" type="StaticBody2D" groups=[
+"Top",
+]]
+collision_layer = 3
+collision_mask = 3
+physics_material_override = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.831373, 0.686275, 0.215686, 1 )

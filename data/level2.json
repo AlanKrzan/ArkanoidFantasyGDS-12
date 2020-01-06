@@ -1,0 +1,16 @@
+[
+[],
+[],
+[],
+["red","green","pink","blue","red","blue","pink","green","red"],
+["red","green","pink","blue","","blue","pink","green","red"],
+["red","green","pink","","","","pink","green","red"],
+["red","green","","","white","","","green","red"],
+["red","","","white","silver","white","","","red"],
+["","","white","silver","gold","silver","white","",""],
+["red","","","white","silver","white","","","red"],
+["red","green","","","white","","","green","red"],
+["red","green","pink","","","","pink","green","red"],
+["red","green","pink","blue","","blue","pink","green","red"],
+["red","green","pink","blue","red","blue","pink","green","red"]
+]

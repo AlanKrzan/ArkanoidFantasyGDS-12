@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/Paddle.gd" type="Script" id=1]
+[ext_resource path="res://art/czarodziej-1.png" type="Texture" id=2]
+[ext_resource path="res://art/czarodziej long-1.png" type="Texture" id=3]
+[ext_resource path="res://art/czarodziej strzelanie-1.png" type="Texture" id=4]
+[ext_resource path="res://sound/power_up_life_gain.wav" type="AudioStream" id=5]
+[ext_resource path="res://sound/power_up_gain.wav" type="AudioStream" id=6]
+[ext_resource path="res://sound/power_up_gain2.wav" type="AudioStream" id=7]
+[ext_resource path="res://sound/level_up_shield.wav" type="AudioStream" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 1 )
+
+[node name="Paddle" type="KinematicBody2D" groups=[
+"Paddle",
+]]
+position = Vector2( 0.122086, 0 )
+collision_mask = 31
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Normal" type="Sprite" parent="."]
+position = Vector2( 0, 35 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"Paddle",
+]]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Long" type="Sprite" parent="."]
+position = Vector2( 0, 30 )
+texture = ExtResource( 3 )
+
+[node name="Shooting" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, 35 )
+texture = ExtResource( 4 )
+
+[node name="LifePowerUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="PowerUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="OtherPowerUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+
+[node name="ExtendSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )

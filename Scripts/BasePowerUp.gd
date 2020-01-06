@@ -7,7 +7,7 @@ var velocity=Vector2(0,speed)
 signal points(score,is_ball)
 var on=true
 
-func die():
+func _die():
     queue_free()
 
 func start(pos):
@@ -15,8 +15,8 @@ func start(pos):
 
 func _ready():
     self.connect("points",get_parent(),"_get_points")
-    get_parent().connect("die",self,"die")
-    get_parent().connect("purge",self,"die")
+    get_parent().connect("die",self,"_die")
+    get_parent().connect("purge",self,"_die")
     get_parent().connect("leaving_stop",self,"stop_movement")
     get_parent().connect("move",self,"restart_movement")
     get_parent().connect("stop",self,"stop_movement")

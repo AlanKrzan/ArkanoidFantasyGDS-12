@@ -37,7 +37,7 @@ texture = ExtResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0, -0.0356483 )
-rect = Rect2( -8, -8, 16, 16 )
+rect = Rect2( -4, -4, 8, 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

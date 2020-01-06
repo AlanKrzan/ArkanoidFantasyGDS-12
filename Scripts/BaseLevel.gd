@@ -97,7 +97,7 @@ func _leaving():
 #warning-ignore:unused_argument
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
 func _process(delta):
-    if Input.is_action_pressed("ui_select") and !started:
+    if Input.is_action_pressed("ui_select") and !started and menu:
         new_game()
     if Input.is_action_just_released("ui_cancel") and menu:
         $Hud. open_pause_menu()

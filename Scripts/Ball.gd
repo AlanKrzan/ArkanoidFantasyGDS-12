@@ -65,7 +65,9 @@ func _physics_process(delta):
                 collision=move_and_collide(motion)
 
 func _on_VisibilityNotifier2D_screen_exited():
+    get_parent()._on_Bottom_redo()
     queue_free()
+    
 
 func _move(how_much):
     position.x = clamp(position.x+how_much, l_margin, r_margin)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/LevelSelectMenu.gd" type="Script" id=1]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=2]
 
 [node name="root" type="Node2D"]
@@ -41,20 +41,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
 
-[node name="PlayButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+[node name="Level1" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 174.0
 margin_bottom = 46.0
 text = "Play"
 
-[node name="LevelSelect" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+[node name="Level2" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_left = 0.0
 margin_top = 78.0
 margin_right = 174.0
 margin_bottom = 124.0
 
-[node name="HighscoreButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+[node name="Level3" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_left = 0.0
 margin_top = 156.0
 margin_right = 174.0
@@ -79,7 +79,7 @@ margin_right = 439.576
 margin_bottom = 561.161
 text = "000"
 align = 1
-[connection signal="pressed" from="Menu/CenterRow/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="Menu/CenterRow/Buttons/LevelSelect" to="." method="_on_LevelSelect_pressed"]
-[connection signal="pressed" from="Menu/CenterRow/Buttons/HighscoreButton" to="." method="_on_HighscoreButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/Level1" to="." method="_on_Level1_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/Level2" to="." method="_on_Level2_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/Level3" to="." method="_on_Level3_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Exit" to="." method="_on_Exit_pressed"]

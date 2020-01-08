@@ -8,14 +8,14 @@ extends "res://Scripts/BaseLevel.gd"
 
 #ustawienie elementów gry do rozgrywki
 func _ready():
+    level=1
     randomize()
+    print("level:",level," lives:", Global.life)
     Hud_signals()
     populate_map("res://data/level1.json")
     $Paddle.start($StartPosition.position)
     self.connect("stop",$Paddle,"_stop_movement")
     self.connect("move",$Paddle,"_start_movement")
-    Global.score=0
-    Global.life=3
     $Hud.update_score(Global.score)
     if Global.check_if_score_higher():
         $Hud.update_highscore(0)

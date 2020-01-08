@@ -14,6 +14,7 @@ func start(pos):
     position=pos
 
 func _ready():
+    $AnimatedSprite.play()
     self.connect("points",get_parent(),"_get_points")
     get_parent().connect("die",self,"_die")
     get_parent().connect("purge",self,"_die")

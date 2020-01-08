@@ -33,6 +33,6 @@ wait_time = 0.01
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-frame = 4
+frame = 3
 playing = true
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

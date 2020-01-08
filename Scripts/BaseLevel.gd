@@ -100,7 +100,7 @@ func _leaving():
 func _process(delta):
     if Input.is_action_pressed("ui_select") and !started and menu and permission:
         new_game()
-    if Input.is_action_just_released("ui_cancel") and menu:
+    if Input.is_action_just_pressed("ui_cancel") and menu:
         $Hud. open_pause_menu()
 
 

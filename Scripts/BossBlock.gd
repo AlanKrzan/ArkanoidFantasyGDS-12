@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var score=50
 var level=0
-var lives=5
+var lives=4
 signal points(score,is_ball) #deklaracji sygnalu do przekazywania punktów
 var power_up=null
 signal win

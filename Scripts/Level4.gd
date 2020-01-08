@@ -8,12 +8,12 @@ extends "res://Scripts/BaseLevel.gd"
 
 #ustawienie elementów gry do rozgrywki
 func _ready():
-    level=3
+    level=4
     print("level:",level," lives:", Global.life)
     randomize()
     Hud_signals()
     $Hud.update_life(Global.life)
-    populate_map("res://data/level3.json")
+    populate_map("res://data/level4.json")
     $Hud.update_score(Global.score)
     if Global.check_if_score_higher():
         $Hud.update_highscore(0)
@@ -32,6 +32,10 @@ func _ready():
             block.set_level(level)
         block.connect("points",self,"_get_points")
         self.connect("purge",block,"death")
+    var boss = get_tree().get_nodes_in_group("Boss")
+    for b in boss:
+        b.connect("win",self,"_win")
+        pass
     #var sample
     #if upgrade_count < blocks.size():
         #print(upgrade_count," ",blocks.size())
@@ -76,4 +80,8 @@ func _win():
 
 
 func _on_WinTimer_timeout():
-    get_tree().change_scene("res://Level4.tscn")
+    if Global.checkScore():
+        $HighscorePopup.popup_centered()
+    else:
+        emit_signal("purge")
+        get_tree().change_scene("res://MainMenu.tscn")

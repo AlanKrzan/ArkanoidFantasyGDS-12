@@ -4,6 +4,7 @@ extends Area2D
 
 export var speed=200
 var velocity=Vector2(0,speed)
+# warning-ignore:unused_signal
 signal points(score,is_ball)
 var on=true
 

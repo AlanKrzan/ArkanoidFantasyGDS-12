@@ -6,6 +6,7 @@ var on=true
 export var score=50
 signal points(score,is_ball)
 signal release
+# warning-ignore:unused_class_variable
 var rotation_offset = deg2rad(90)
 
 func start(pos,vel=Vector2(0,50)):

@@ -2,8 +2,11 @@ extends Node
 #warning-ignore-all:unused_variable
 
 var score=-1
+# warning-ignore:unused_class_variable
 var life=666
+# warning-ignore:unused_class_variable
 var Ball = preload("res://Ball.tscn")   #wczytywanie schematu piłki
+# warning-ignore:unused_class_variable
 var Enemy = preload("res://BaseEnemy.tscn")
 var LaserOdds=0.3
 var CatchOdds=0.15
@@ -21,6 +24,7 @@ var upgrades={
     "Expand":preload("res://ExtendPowerUp.tscn"),
     "Duplicate":preload("res://ExtraBallPowerUp.tscn")
    }
+# warning-ignore:unused_class_variable
 var Blocks={
     "blue": preload("res://BlueBlock.tscn"), #1
     "cyan": preload("res://CyanBlock.tscn"), #2

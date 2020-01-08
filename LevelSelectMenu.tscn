@@ -26,9 +26,9 @@ __meta__ = {
 }
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]
-margin_top = 210.0
+margin_top = 171.0
 margin_right = 174.0
-margin_bottom = 490.0
+margin_bottom = 529.0
 alignment = 1
 __meta__ = {
 "_edit_group_": true
@@ -36,7 +36,7 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
 margin_right = 174.0
-margin_bottom = 280.0
+margin_bottom = 358.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
@@ -61,11 +61,17 @@ margin_right = 174.0
 margin_bottom = 202.0
 text = "Highscore"
 
-[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+[node name="Level4" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_left = 0.0
 margin_top = 234.0
 margin_right = 174.0
 margin_bottom = 280.0
+
+[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+margin_left = 0.0
+margin_top = 312.0
+margin_right = 174.0
+margin_bottom = 358.0
 text = "Exit"
 
 [node name="HighScoreLabel" type="Label" parent="."]
@@ -82,4 +88,5 @@ align = 1
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Level1" to="." method="_on_Level1_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Level2" to="." method="_on_Level2_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Level3" to="." method="_on_Level3_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/Level4" to="." method="_on_Level4_pressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Exit" to="." method="_on_Exit_pressed"]

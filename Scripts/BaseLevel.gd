@@ -7,7 +7,7 @@ var started=false                       #czy rozgrywka się zaczeła?, używana 
 var blocks_left=0                       #licznik bloczków
 var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
 var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
-var upgrade_count=0                     #suma ulepszen
+#var upgrade_count=0                     #suma ulepszen
 #export var extend_powerup_count=3       #ilosc ulepszen poszerzających kijek)
 #export var fire_powerup_count=4
 #export var extra_life_count=2           #ilosc ulepszen dających dodatkowe życie
@@ -15,10 +15,12 @@ var upgrade_count=0                     #suma ulepszen
 #export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
 #export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
 #export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
+# warning-ignore:unused_class_variable
 export var level=1                      #obecny poziom gry
 var extra_balls=0                       #ilosc dodatkowych piłek
 var closed=true
 var menu=true
+var permission=true
 signal stop                             #sygnały wysyłane do reszty kodu
 signal leaving_stop
 signal move
@@ -96,7 +98,7 @@ func _leaving():
 #warning-ignore:unused_argument
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
 func _process(delta):
-    if Input.is_action_pressed("ui_select") and !started and menu:
+    if Input.is_action_pressed("ui_select") and !started and menu and permission:
         new_game()
     if Input.is_action_just_released("ui_cancel") and menu:
         $Hud. open_pause_menu()
@@ -163,14 +165,17 @@ func _on_Bottom_redo():
 func _game_over():
     emit_signal("stop")
     $Hud.show_message("GAME OVER")
+    permission=false
     menu=false
     $EscapeTimer.start()
     
 func stop_movement():
+    permission=false
     $SpeedUpTimer.stop()
     emit_signal("stop")
     
 func start_movement():
+    permission=true
     $SpeedUpTimer.start()
     emit_signal("move")
     

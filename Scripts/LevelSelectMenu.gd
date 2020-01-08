@@ -8,6 +8,7 @@ func _ready():
     $Menu/CenterRow/Buttons/Level1.start("Level 1","res://Level1.tscn")
     $Menu/CenterRow/Buttons/Level2.start("Level 2","")
     $Menu/CenterRow/Buttons/Level3.start("Level 3","")
+    $Menu/CenterRow/Buttons/Level4.start("Level 4","")
     $Menu/CenterRow/Buttons/Exit.start("Exit","Exit")
 
 
@@ -26,3 +27,7 @@ func _on_Level2_pressed():
 
 func _on_Level3_pressed():
     get_tree().change_scene("res://Level3.tscn")
+
+
+func _on_Level4_pressed():
+    get_tree().change_scene("res://Level4.tscn")

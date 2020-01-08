@@ -51,4 +51,5 @@ func _on_ResumeButton_pressed():
 
 func _on_ExitButton_pressed():
     emit_signal("purge")
+# warning-ignore:return_value_discarded
     get_tree().change_scene("res://MainMenu.tscn")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://BaseLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Level4.gd" type="Script" id=2]
+[ext_resource path="res://BossBlock.tscn" type="PackedScene" id=3]
+
+[node name="Level1" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Paddle" parent="." index="5"]
+self_modulate = Color( 0.666667, 0.160784, 0.160784, 1 )
+
+[node name="BossBlock" parent="." index="7" instance=ExtResource( 3 )]
+position = Vector2( 410, 435 )
+score = 5
+
+[node name="WinTimer" type="Timer" parent="." index="11"]
+wait_time = 5.0
+[connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]

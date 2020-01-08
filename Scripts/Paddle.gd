@@ -29,6 +29,7 @@ signal win
 signal extraBalls
 signal half_speed
 signal leaving
+# warning-ignore:unused_signal
 signal start
 
 #ustawienie kijka na pozycji początkowej, i wyświetlenie go

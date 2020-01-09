@@ -21,7 +21,6 @@ func hit():
         lives-=1
     else:
         emit_signal("points",_get_score(),true)
-        print("win")
         emit_signal("win")
         queue_free()
     

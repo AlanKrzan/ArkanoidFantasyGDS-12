@@ -34,7 +34,6 @@ func _physics_process(delta):
     if on:
         var collision = move_and_collide(velocity * delta)
         if collision:
-            var oldVelocity=velocity
             if collision.collider.has_method("hit"):
                 collision.collider.hit()
             var motion = collision.remainder.bounce(collision.normal)
@@ -53,7 +52,7 @@ func _physics_process(delta):
                         rotation = fmod(rotation, 2 * PI)
                         rotate(-newVelocity.angle_to(Vector2(0,1))-rotation+PI)
                     else:
-                        move_and_collide(movements[0]*delta)
+                        collision=move_and_collide(movements[0]*delta)
                         velocity = movements[1]
                         rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                 else:

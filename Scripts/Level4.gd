@@ -9,7 +9,7 @@ extends "res://Scripts/BaseLevel.gd"
 #ustawienie elementów gry do rozgrywki
 func _ready():
     level=4
-    print("level:",level," lives:", Global.life)
+    #print("level:",level," lives:", Global.life)
     randomize()
     Hud_signals()
     $Hud.update_life(Global.life)

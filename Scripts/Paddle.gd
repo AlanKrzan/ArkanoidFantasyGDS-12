@@ -47,7 +47,6 @@ func reset():
 func power_up(value):
     if upgrade != 0:
         _reset_power()
-    print("power up:"+str(value))
     if value==1:    #extend
         $ExtendSound.play()
         upgrade=1

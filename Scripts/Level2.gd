@@ -10,7 +10,6 @@ extends "res://Scripts/BaseLevel.gd"
 func _ready():
     level=2
     randomize()
-    print("level:",level," lives:", Global.life)
     Hud_signals()
     populate_map("res://data/level2.json")
     $Hud.update_life(Global.life)

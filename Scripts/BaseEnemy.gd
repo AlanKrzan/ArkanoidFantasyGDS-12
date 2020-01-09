@@ -51,7 +51,6 @@ func _physics_process(delta):
                 emit_signal("points",_get_score(),false)
                 queue_free()
             var motion = collision.remainder.bounce(collision.normal)
-            var oldvelocity=velocity
             velocity = velocity.bounce(collision.normal)
             rotation = fmod(rotation, 2 * PI)
             rotate(-velocity.angle_to(Vector2(0,1))-rotation+rotation_offset +PI)

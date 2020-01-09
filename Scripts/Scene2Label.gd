@@ -6,7 +6,6 @@ func _ready():
 
 func _input(event):
     if Input.is_action_just_released("ui_select"):
-        print(get_visible_characters()," ",get_total_character_count())
         if get_visible_characters() >= get_total_character_count():
             get_tree().change_scene("res://Level1.tscn")
         else:

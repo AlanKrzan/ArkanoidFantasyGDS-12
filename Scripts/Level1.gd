@@ -10,9 +10,9 @@ extends "res://Scripts/BaseLevel.gd"
 func _ready():
     level=1
     randomize()
-    print("level:",level," lives:", Global.life)
     Hud_signals()
     populate_map("res://data/level1.json")
+    $Hud.update_life(Global.life)
     $Paddle.start($StartPosition.position)
     self.connect("stop",$Paddle,"_stop_movement")
     self.connect("move",$Paddle,"_start_movement")

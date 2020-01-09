@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Hud.gd" type="Script" id=1]
-[ext_resource path="res://art/icon.png" type="Texture" id=2]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/ikonka scroll.png" type="Texture" id=2]
+[ext_resource path="res://art/icon.png" type="Texture" id=3]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=4]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -43,6 +44,12 @@ margin_top = 220.0
 margin_bottom = 294.0
 align = 1
 
+[node name="LifeSprite" type="Sprite" parent="."]
+position = Vector2( 50, 20 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 46, 33 )
+
 [node name="Hue" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0.321569 )
 anchor_right = 1.0
@@ -63,7 +70,7 @@ visible = false
 modulate = Color( 1, 1, 1, 0.705882 )
 position = Vector2( 392.263, 441.372 )
 scale = Vector2( 5.0477, 4.28037 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu"]
 margin_left = 233.0
@@ -79,14 +86,14 @@ margin_bottom = 275.0
 custom_constants/separation = 50
 alignment = 1
 
-[node name="ResumeButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="ResumeButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 66.0
 margin_right = 127.0
 margin_bottom = 112.0
 text = "Return"
 
-[node name="ExitButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="ExitButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 162.0
 margin_right = 127.0

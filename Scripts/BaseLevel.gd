@@ -144,7 +144,6 @@ func _exit_open_play():
 
 #funkcja ucieczki piłki, sprawdzanie warunku porażki
 func _on_Bottom_redo():
-    print("exit")
     if extra_balls>0:
         extra_balls-=1
     else:

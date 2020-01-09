@@ -41,7 +41,7 @@ z_index = 1
 rect = Rect2( -32, -32, 64, 64 )
 
 [node name="SpawnOverideTimer" type="Timer" parent="."]
-wait_time = 0.21
+wait_time = 0.6
 one_shot = true
 autostart = true
 

@@ -50,18 +50,19 @@ func _physics_process(delta):
                         on=false
                         newVelocity = movements[1]
                         $AnimatedSprite.stop()
-                        rotate(-newVelocity.angle_to(oldVelocity))
+                        rotation = fmod(rotation, 2 * PI)
+                        rotate(-newVelocity.angle_to(Vector2(0,1))-rotation+PI)
                     else:
                         move_and_collide(movements[0]*delta)
                         velocity = movements[1]
-                        rotate(-velocity.angle_to(oldVelocity))
+                        rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                 else:
                     velocity = velocity.bounce(collision.normal)
-                    rotate(-velocity.angle_to(oldVelocity))
+                    rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                     collision=move_and_collide(motion)
             else:
                 velocity = velocity.bounce(collision.normal)
-                rotate(-velocity.angle_to(oldVelocity))
+                rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                 collision=move_and_collide(motion)
 
 func _on_VisibilityNotifier2D_screen_exited():

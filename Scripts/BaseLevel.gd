@@ -21,6 +21,7 @@ var extra_balls=0                       #ilosc dodatkowych piłek
 var closed=true
 var menu=true
 var permission=true
+var victory=false
 signal stop                             #sygnały wysyłane do reszty kodu
 signal leaving_stop
 signal move
@@ -209,7 +210,10 @@ func _on_HighscorePopup_confirmed():
     var name = $HighscorePopup/LineEdit.get_text()
     if name.length()>0:
         Global.insertScore(name)
-        get_tree().change_scene("res://HighScores.tscn")
+        if victory:
+            get_tree().change_scene("res://EndingScene.tscn")
+        else:
+            get_tree().change_scene("res://HighScores.tscn")
     else:
         $HighscorePopup.set_text("Please, enter your name here:")
 

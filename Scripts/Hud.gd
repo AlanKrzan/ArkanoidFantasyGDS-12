@@ -9,7 +9,6 @@ func update_life(lives):
     if lives>0:
         $LifeSprite.position.x=37+23*lives
         $LifeSprite.set_region_rect(Rect2(0,0,46*lives,32))
-    $LifeLabel.text = str(lives)
     
 #funkcja aktualizująca wypisywany wynik
 func update_score(score):

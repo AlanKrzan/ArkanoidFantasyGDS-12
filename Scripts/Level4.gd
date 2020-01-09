@@ -81,6 +81,7 @@ func _win():
 
 func _on_WinTimer_timeout():
     if Global.checkScore():
+        victory=true
         $HighscorePopup.popup_centered()
     else:
         emit_signal("purge")

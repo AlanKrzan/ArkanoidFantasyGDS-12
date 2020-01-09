@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://fonts/Hey Fun.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Button.gd" type="Script" id=2]
 [ext_resource path="res://art/laser_bullet.png" type="Texture" id=3]
 

@@ -28,14 +28,6 @@ margin_bottom = 19.2262
 text = "Score"
 valign = 1
 
-[node name="LifeLabel" type="Label" parent="."]
-margin_top = 20.0
-margin_right = 160.0
-margin_bottom = 40.0
-text = "3"
-align = 1
-valign = 1
-
 [node name="MessageLabel" type="Label" parent="."]
 anchor_top = 0.5
 anchor_right = 1.0
@@ -80,24 +72,24 @@ margin_bottom = 578.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/HBoxContainer"]
-margin_left = 97.0
-margin_right = 224.0
+margin_left = 96.0
+margin_right = 225.0
 margin_bottom = 275.0
 custom_constants/separation = 50
 alignment = 1
 
 [node name="ResumeButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_left = 0.0
-margin_top = 66.0
-margin_right = 127.0
+margin_top = 65.0
+margin_right = 129.0
 margin_bottom = 112.0
 text = "Return"
 
 [node name="ExitButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 162.0
-margin_right = 127.0
-margin_bottom = 208.0
+margin_right = 129.0
+margin_bottom = 209.0
 text = "Exit"
 [connection signal="pressed" from="PauseMenu/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PauseMenu/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

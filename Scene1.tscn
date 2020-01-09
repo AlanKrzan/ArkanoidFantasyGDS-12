@@ -1,12 +1,13 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://art/Background1.jpg" type="Texture" id=1]
+[ext_resource path="res://art/tlo-menu.png" type="Texture" id=1]
 [ext_resource path="res://art/czarodziejfin2.png" type="Texture" id=2]
-[ext_resource path="res://fonts/Hey Fun.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scripts/Scene1Label.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 22
+use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="Scene1" type="Node2D"]

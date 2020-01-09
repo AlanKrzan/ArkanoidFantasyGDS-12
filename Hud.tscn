@@ -61,7 +61,7 @@ region_rect = Rect2( 0, 0, 46, 33 )
 modulate = Color( 1, 1, 1, 0.321569 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.952941, 0.827451, 0, 1 )
+color = Color( 0.219608, 0.286275, 0.4, 0.490196 )
 
 [node name="PauseMenu" type="Container" parent="."]
 

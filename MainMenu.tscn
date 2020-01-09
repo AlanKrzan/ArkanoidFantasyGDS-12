@@ -22,27 +22,27 @@ color = Color( 1, 0, 1, 1 )
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 350.0
-margin_top = 200.0
-margin_right = 460.0
-margin_bottom = 900.0
+margin_left = 531.861
+margin_top = 79.714
+margin_right = 717.861
+margin_bottom = 779.714
 alignment = 1
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]
-margin_top = 210.0
-margin_right = 174.0
-margin_bottom = 490.0
+margin_top = 208.0
+margin_right = 186.0
+margin_bottom = 492.0
 alignment = 1
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
-margin_right = 174.0
-margin_bottom = 280.0
+margin_right = 186.0
+margin_bottom = 284.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
@@ -50,28 +50,28 @@ custom_constants/separation = 32
 [node name="PlayButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 174.0
-margin_bottom = 46.0
+margin_right = 186.0
+margin_bottom = 47.0
 text = "Play"
 
 [node name="LevelSelect" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_left = 0.0
-margin_top = 78.0
-margin_right = 174.0
-margin_bottom = 124.0
+margin_top = 79.0
+margin_right = 186.0
+margin_bottom = 126.0
 
 [node name="HighscoreButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_left = 0.0
-margin_top = 156.0
-margin_right = 174.0
-margin_bottom = 202.0
+margin_top = 158.0
+margin_right = 186.0
+margin_bottom = 205.0
 text = "Highscore"
 
 [node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_left = 0.0
-margin_top = 234.0
-margin_right = 174.0
-margin_bottom = 280.0
+margin_top = 237.0
+margin_right = 186.0
+margin_bottom = 284.0
 text = "Exit"
 
 [node name="HighScoreLabel" type="Label" parent="."]

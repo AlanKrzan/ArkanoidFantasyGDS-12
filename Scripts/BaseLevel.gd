@@ -147,6 +147,7 @@ func _exit_open_play():
 func _on_Bottom_redo():
     if extra_balls>0:
         extra_balls-=1
+        $Hud.update_life(Global.life)
     else:
         Global.life-=1
         $Hud.update_life(Global.life)

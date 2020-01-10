@@ -85,4 +85,4 @@ func _on_WinTimer_timeout():
         $HighscorePopup.popup_centered()
     else:
         emit_signal("purge")
-        get_tree().change_scene("res://MainMenu.tscn")
+        get_tree().change_scene("res://EndingScene.tscn")

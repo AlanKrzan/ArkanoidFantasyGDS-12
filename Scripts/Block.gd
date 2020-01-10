@@ -13,6 +13,7 @@ func start(pos):
     position=pos
     
 func hit():
+    $AudioStreamPlayer2D.play()
     emit_signal("points",_get_score(),true)
     if Global.check_power():
         var c=Global.return_power().instance()
@@ -24,8 +25,7 @@ func set_power(powerup):
     power_up=powerup
 
 
-
-
     
 func _get_score(): # wstępna deklaracja funkcji obliczającej ilość punktów
+
     return score

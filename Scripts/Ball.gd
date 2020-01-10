@@ -34,7 +34,10 @@ func _physics_process(delta):
     if on:
         var collision = move_and_collide(velocity * delta)
         if collision:
+            if collision.collider.is_in_group("Gold"):
+                $GoldenBlockHitSound.play()
             if collision.collider.has_method("hit"):
+                $BlockHitSound.play()
                 collision.collider.hit()
             var motion = collision.remainder.bounce(collision.normal)
             if collision.collider.has_method("power_up"):

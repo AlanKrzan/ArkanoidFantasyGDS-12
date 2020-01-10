@@ -14,6 +14,7 @@ func _restart_movement():
 func start(pos):
      $AnimatedSprite.play()
      position=pos
+     $AudioStreamPlayer.play()
 
 func _physics_process(delta):
     if on:

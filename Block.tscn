@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Block.gd" type="Script" id=1]
 [ext_resource path="res://art/icon.png" type="Texture" id=2]
+[ext_resource path="res://sound/176655__jorickhoofd__deng-hit.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 20 )
@@ -26,3 +27,6 @@ margin_top = -22.5
 margin_right = 40.0
 margin_bottom = 22.5
 color = Color( 0, 0, 0, 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

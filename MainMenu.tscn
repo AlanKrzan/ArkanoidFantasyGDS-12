@@ -72,9 +72,9 @@ __meta__ = {
 }
 
 [node name="CenterRow" type="HBoxContainer" parent="ScrollSprite/Menu"]
-margin_top = 98.0
+margin_top = 58.0
 margin_right = 239.0
-margin_bottom = 382.0
+margin_bottom = 421.0
 alignment = 1
 __meta__ = {
 "_edit_group_": true
@@ -82,7 +82,7 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="ScrollSprite/Menu/CenterRow"]
 margin_right = 239.0
-margin_bottom = 284.0
+margin_bottom = 363.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
@@ -107,11 +107,17 @@ margin_right = 239.0
 margin_bottom = 205.0
 text = "Highscore"
 
-[node name="Exit" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
+[node name="Credits" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
 margin_left = 0.0
 margin_top = 237.0
 margin_right = 239.0
 margin_bottom = 284.0
+
+[node name="Exit" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
+margin_left = 0.0
+margin_top = 316.0
+margin_right = 239.0
+margin_bottom = 363.0
 text = "Exit"
 
 [node name="HighScoreLabel" type="Label" parent="."]
@@ -130,4 +136,5 @@ align = 1
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/LevelSelect" to="." method="_on_LevelSelect_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/HighscoreButton" to="." method="_on_HighscoreButton_pressed"]
+[connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/Exit" to="." method="_on_Exit_pressed"]

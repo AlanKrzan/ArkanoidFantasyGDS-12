@@ -66,7 +66,8 @@ func _spawn_ball():
 
 
 func _add_life():
-    Global.life+=1
+    if Global.life<5:
+        Global.life+=1
     $Hud.update_life(Global.life)
 
 

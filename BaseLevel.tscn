@@ -215,7 +215,7 @@ wait_time = 5.0
 wait_time = 5.0
 one_shot = true
 
-[node name="NewGameSound" type="AudioStreamPlayer2D" parent="."]
+[node name="NewGameSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 48 )
 
 [node name="HighscorePopup" type="AcceptDialog" parent="."]

@@ -6,6 +6,7 @@ func _ready():
     $ScrollSprite/Menu/CenterRow/Buttons/PlayButton.start("Play","res://Level1.tscn")
     $ScrollSprite/Menu/CenterRow/Buttons/Exit.start("Exit","Exit")
     $ScrollSprite/Menu/CenterRow/Buttons/LevelSelect.start("Level Select","")
+    $ScrollSprite/Menu/CenterRow/Buttons/Credits.start("Credits","")
     $ScrollSprite/Menu/CenterRow/Buttons/HighscoreButton.start("Highscores","res://HighScores.tscn")
 
 
@@ -25,3 +26,7 @@ func _on_HighscoreButton_pressed():
 
 func _on_LevelSelect_pressed():
     get_tree().change_scene("res://LevelSelectMenu.tscn")
+
+
+func _on_Credits_pressed():
+    get_tree().change_scene("res://EndingCreditsScene.tscn")

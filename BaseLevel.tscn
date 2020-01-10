@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Scripts/Level1.gd" type="Script" id=1]
 [ext_resource path="res://art/tlo2.png" type="Texture" id=2]
@@ -48,8 +48,9 @@
 [ext_resource path="res://Scripts/Bottom.gd" type="Script" id=46]
 [ext_resource path="res://Hud.tscn" type="PackedScene" id=47]
 [ext_resource path="res://sound/new_stage_sound.wav" type="AudioStream" id=48]
-[ext_resource path="res://art/sciana_poziom 2.png" type="Texture" id=49]
-[ext_resource path="res://art/sciana_poziom 3.png" type="Texture" id=50]
+[ext_resource path="res://sound/firefles-dreams.ogg" type="AudioStream" id=49]
+[ext_resource path="res://art/sciana_poziom 2.png" type="Texture" id=50]
+[ext_resource path="res://art/sciana_poziom 3.png" type="Texture" id=51]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 360, 22.5 )
@@ -218,6 +219,11 @@ one_shot = true
 [node name="NewGameSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 48 )
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 49 )
+volume_db = -10.0
+autoplay = true
+
 [node name="HighscorePopup" type="AcceptDialog" parent="."]
 visible = true
 margin_left = 321.0
@@ -241,11 +247,11 @@ texture = ExtResource( 4 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 415.572, -164.109 )
-texture = ExtResource( 49 )
+texture = ExtResource( 50 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 position = Vector2( 595.723, -164.423 )
-texture = ExtResource( 50 )
+texture = ExtResource( 51 )
 [connection signal="animation_finished" from="Top/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="area_entered" from="Bottom" to="Bottom" method="_on_Bottom_area_entered"]
 [connection signal="body_entered" from="Bottom" to="Bottom" method="_on_Bottom_body_entered"]

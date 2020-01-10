@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://art/tlo-menu.png" type="Texture" id=2]
 [ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://art/scroll2.png" type="Texture" id=4]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sound/firefles-dreams.ogg" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -72,9 +73,9 @@ __meta__ = {
 }
 
 [node name="CenterRow" type="HBoxContainer" parent="ScrollSprite/Menu"]
-margin_top = 58.0
+margin_top = 83.0
 margin_right = 239.0
-margin_bottom = 421.0
+margin_bottom = 396.0
 alignment = 1
 __meta__ = {
 "_edit_group_": true
@@ -82,7 +83,7 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="ScrollSprite/Menu/CenterRow"]
 margin_right = 239.0
-margin_bottom = 363.0
+margin_bottom = 313.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
@@ -91,33 +92,33 @@ custom_constants/separation = 32
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 239.0
-margin_bottom = 47.0
+margin_bottom = 37.0
 text = "Play"
 
 [node name="LevelSelect" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
 margin_left = 0.0
-margin_top = 79.0
+margin_top = 69.0
 margin_right = 239.0
-margin_bottom = 126.0
+margin_bottom = 106.0
 
 [node name="HighscoreButton" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
 margin_left = 0.0
-margin_top = 158.0
+margin_top = 138.0
 margin_right = 239.0
-margin_bottom = 205.0
+margin_bottom = 175.0
 text = "Highscore"
 
 [node name="Credits" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
 margin_left = 0.0
-margin_top = 237.0
+margin_top = 207.0
 margin_right = 239.0
-margin_bottom = 284.0
+margin_bottom = 244.0
 
 [node name="Exit" parent="ScrollSprite/Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
 margin_left = 0.0
-margin_top = 316.0
+margin_top = 276.0
 margin_right = 239.0
-margin_bottom = 363.0
+margin_bottom = 313.0
 text = "Exit"
 
 [node name="HighScoreLabel" type="Label" parent="."]
@@ -132,7 +133,9 @@ margin_bottom = 561.161
 text = "000"
 align = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/LevelSelect" to="." method="_on_LevelSelect_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/HighscoreButton" to="." method="_on_HighscoreButton_pressed"]

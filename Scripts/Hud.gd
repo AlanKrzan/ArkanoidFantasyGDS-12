@@ -9,6 +9,10 @@ func update_life(lives):
     if lives>0:
         $LifeSprite.position.x=37+23*lives
         $LifeSprite.set_region_rect(Rect2(0,0,46*lives,32))
+        #$TextureRect.draw_texture_rect_region("res://art/ikonka scroll.png",Rect2(0,0,46*lives,32))
+        $TextureRect.rect_size.x=46*lives
+        
+
     
 #funkcja aktualizująca wypisywany wynik
 func update_score(score):

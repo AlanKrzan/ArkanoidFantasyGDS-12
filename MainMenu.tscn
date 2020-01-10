@@ -125,6 +125,8 @@ margin_right = 439.576
 margin_bottom = 561.161
 text = "000"
 align = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/LevelSelect" to="." method="_on_LevelSelect_pressed"]
 [connection signal="pressed" from="ScrollSprite/Menu/CenterRow/Buttons/HighscoreButton" to="." method="_on_HighscoreButton_pressed"]

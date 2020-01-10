@@ -8,6 +8,8 @@ var life=666
 var Ball = preload("res://Ball.tscn")   #wczytywanie schematu piłki
 # warning-ignore:unused_class_variable
 var Enemy = preload("res://BaseEnemy.tscn")
+# warning-ignore:unused_class_variable
+var Scroll = preload("res://art/ikonka scroll.png")
 var LaserOdds=0.3
 var CatchOdds=0.15
 var SlowOdds=0.1
@@ -15,6 +17,7 @@ var ByeOdds=0.05
 var DuplicateOdds=0.15
 var ExtraLifeOdds=0.05
 var ExpandOdds = 0.2
+
 var upgrades={
     "Lasers":preload("res://FirePowerUp.tscn"),
     "Catch":preload("res://StickyPowerUp.tscn"),

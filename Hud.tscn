@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://art/ikonka scroll.png" type="Texture" id=3]
-[ext_resource path="res://art/icon.png" type="Texture" id=4]
+[ext_resource path="res://art/scroll2.png" type="Texture" id=4]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -52,10 +52,20 @@ custom_fonts/font = SubResource( 3 )
 align = 1
 
 [node name="LifeSprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 50, 20 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 46, 33 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 33.0
+margin_top = 3.0
+margin_right = 125.0
+margin_bottom = 35.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
 
 [node name="Hue" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0.321569 )
@@ -66,6 +76,7 @@ color = Color( 0.219608, 0.286275, 0.4, 0.490196 )
 [node name="PauseMenu" type="Container" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+visible = false
 margin_left = 230.0
 margin_top = 305.0
 margin_right = 555.0
@@ -73,10 +84,7 @@ margin_bottom = 580.0
 color = Color( 0.85098, 0.87451, 0.133333, 0.690196 )
 
 [node name="Sprite" type="Sprite" parent="PauseMenu"]
-visible = false
-modulate = Color( 1, 1, 1, 0.705882 )
-position = Vector2( 392.263, 441.372 )
-scale = Vector2( 5.0477, 4.28037 )
+position = Vector2( 385.615, 443.073 )
 texture = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu"]

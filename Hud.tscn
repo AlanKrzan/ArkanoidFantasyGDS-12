@@ -6,14 +6,14 @@
 [ext_resource path="res://art/icon.png" type="Texture" id=4]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=5]
 
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 2 )
-
 [sub_resource type="DynamicFont" id=1]
-use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 2 )
 
@@ -26,7 +26,7 @@ anchor_right = 1.0
 margin_left = -160.0
 margin_top = 25.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
 valign = 1
@@ -38,7 +38,7 @@ margin_left = -180.0
 margin_top = 4.22623
 margin_right = 0.773682
 margin_bottom = 19.2262
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Score"
 valign = 1
 
@@ -48,7 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = 220.0
 margin_bottom = 294.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 
 [node name="LifeSprite" type="Sprite" parent="."]

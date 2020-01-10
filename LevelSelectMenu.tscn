@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/LevelSelectMenu.gd" type="Script" id=1]
 [ext_resource path="res://art/tlo-menu.png" type="Texture" id=2]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/scroll2.png" type="Texture" id=3]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=4]
 
 [node name="root" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,6 +18,10 @@ color = Color( 1, 0, 1, 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 405, 540 )
 texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 405, 540 )
+texture = ExtResource( 3 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -46,33 +51,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
 
-[node name="Level1" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+[node name="Level1" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 186.0
 margin_bottom = 47.0
 text = "Play"
 
-[node name="Level2" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+[node name="Level2" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 79.0
 margin_right = 186.0
 margin_bottom = 126.0
 
-[node name="Level3" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+[node name="Level3" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 158.0
 margin_right = 186.0
 margin_bottom = 205.0
 text = "Highscore"
 
-[node name="Level4" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+[node name="Level4" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 237.0
 margin_right = 186.0
 margin_bottom = 284.0
 
-[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 316.0
 margin_right = 186.0

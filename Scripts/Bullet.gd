@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed=900
+export var speed=600
 var velocity=Vector2(0,-speed)
 var on=true
 var living=true

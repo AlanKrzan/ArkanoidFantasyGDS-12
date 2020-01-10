@@ -7,7 +7,7 @@ var l_margin
 var r_margin
 export var paddle_speed = 800  # How fast the player will move 
 export var paddle_width = 60
-export var reload_time = 0.625
+export var reload_time = 0.417
 var reloading=0
 var screen_size # Size of the game window.
 onready var initial_pos = self.position

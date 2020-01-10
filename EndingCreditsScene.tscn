@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://art/tlo-menu.png" type="Texture" id=1]
 [ext_resource path="res://art/scroll2.png" type="Texture" id=2]
 [ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scripts/EndingCreditsSceneLabel.gd" type="Script" id=4]
+[ext_resource path="res://art/credits.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 22
@@ -73,4 +74,8 @@ script = ExtResource( 4 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 405, 540 )
+texture = ExtResource( 5 )
 [connection signal="timeout" from="Timer" to="Sprite2/Label" method="_on_Timer_timeout"]

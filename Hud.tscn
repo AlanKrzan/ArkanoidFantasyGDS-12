@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Hud.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://art/ikonka scroll.png" type="Texture" id=3]
-[ext_resource path="res://art/scroll2.png" type="Texture" id=4]
+[ext_resource path="res://art/scroll powerups.png" type="Texture" id=4]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -72,6 +72,9 @@ modulate = Color( 1, 1, 1, 0.321569 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.219608, 0.286275, 0.4, 0.490196 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PauseMenu" type="Container" parent="."]
 
@@ -84,35 +87,35 @@ margin_bottom = 580.0
 color = Color( 0.85098, 0.87451, 0.133333, 0.690196 )
 
 [node name="Sprite" type="Sprite" parent="PauseMenu"]
-position = Vector2( 385.615, 443.073 )
+position = Vector2( 383.509, 317.809 )
 texture = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu"]
 margin_left = 233.0
-margin_top = 303.0
+margin_top = 455.0
 margin_right = 555.0
-margin_bottom = 578.0
+margin_bottom = 500.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/HBoxContainer"]
-margin_left = 96.0
-margin_right = 225.0
-margin_bottom = 275.0
-custom_constants/separation = 50
+margin_left = 111.0
+margin_right = 211.0
+margin_bottom = 74.0
+custom_constants/separation = 0
 alignment = 1
 
 [node name="ResumeButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_left = 0.0
-margin_top = 65.0
-margin_right = 129.0
-margin_bottom = 112.0
+margin_top = 0.0
+margin_right = 100.0
+margin_bottom = 37.0
 text = "Return"
 
 [node name="ExitButton" parent="PauseMenu/HBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_left = 0.0
-margin_top = 162.0
-margin_right = 129.0
-margin_bottom = 209.0
+margin_top = 37.0
+margin_right = 100.0
+margin_bottom = 74.0
 text = "Exit"
 [connection signal="pressed" from="PauseMenu/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PauseMenu/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

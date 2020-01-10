@@ -20,6 +20,7 @@ export var level=1                      #obecny poziom gry
 var extra_balls=0                       #ilosc dodatkowych piłek
 var closed=true
 var menu=true
+#var menu_open=false
 var permission=true
 var victory=false
 signal stop                             #sygnały wysyłane do reszty kodu
@@ -102,9 +103,9 @@ func _leaving():
 func _process(delta):
     if Input.is_action_pressed("ui_select") and !started and menu and permission:
         new_game()
-    if Input.is_action_just_pressed("ui_cancel") and menu:
-        $Hud. open_pause_menu()
-
+    elif Input.is_action_just_released("ui_cancel") and menu:
+        $Hud.open_pause_menu()
+    
 
 
 

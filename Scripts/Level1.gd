@@ -8,14 +8,14 @@ extends "res://Scripts/BaseLevel.gd"
 
 #ustawienie elementów gry do rozgrywki
 func _ready():
+    level=1
     randomize()
     Hud_signals()
     populate_map("res://data/level1.json")
+    $Hud.update_life(Global.life)
     $Paddle.start($StartPosition.position)
     self.connect("stop",$Paddle,"_stop_movement")
     self.connect("move",$Paddle,"_start_movement")
-    Global.score=0
-    Global.life=3
     $Hud.update_score(Global.score)
     if Global.check_if_score_higher():
         $Hud.update_highscore(0)
@@ -31,12 +31,12 @@ func _ready():
             block.set_level(level)
         block.connect("points",self,"_get_points")
         self.connect("purge",block,"death")
-    var sample
-    if upgrade_count < blocks.size():
-        #print(upgrade_count," ",blocks.size())
-        sample=__rand_sample(upgrade_count,blocks)
-    else:
-        sample=__rand_sample(blocks.size(),blocks)
+    #var sample
+    #if upgrade_count < blocks.size():
+    #    #print(upgrade_count," ",blocks.size())
+    #    sample=__rand_sample(upgrade_count,blocks)
+    #else:
+    #    sample=__rand_sample(blocks.size(),blocks)
     #var powerup_list=_powerup_list()
     #for i in range(sample.size()):
     #    sample[i].set_power(powerup_list[i])

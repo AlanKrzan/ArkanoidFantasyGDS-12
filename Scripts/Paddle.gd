@@ -7,7 +7,7 @@ var l_margin
 var r_margin
 export var paddle_speed = 800  # How fast the player will move 
 export var paddle_width = 60
-export var reload_time = 1
+export var reload_time = 0.417
 var reloading=0
 var screen_size # Size of the game window.
 onready var initial_pos = self.position
@@ -29,6 +29,7 @@ signal win
 signal extraBalls
 signal half_speed
 signal leaving
+# warning-ignore:unused_signal
 signal start
 
 #ustawienie kijka na pozycji początkowej, i wyświetlenie go
@@ -46,7 +47,6 @@ func reset():
 func power_up(value):
     if upgrade != 0:
         _reset_power()
-    print("power up:"+str(value))
     if value==1:    #extend
         $ExtendSound.play()
         upgrade=1

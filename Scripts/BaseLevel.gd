@@ -4,11 +4,10 @@ extends Node2D
 
 
 var started=false                       #czy rozgrywka się zaczeła?, używana w logice gry
-var life=3                              #inicjalizacja ilości żyć
 var blocks_left=0                       #licznik bloczków
 var spawn_trigger_value                 #wartość od której zaczynają się pojawiać przeciwnicy, w kodzie jest to 3/4 bloczków
 var spawn_permission=true               #zmienna do ograniczenia ilości przeciwników
-var upgrade_count=0                     #suma ulepszen
+#var upgrade_count=0                     #suma ulepszen
 #export var extend_powerup_count=3       #ilosc ulepszen poszerzających kijek)
 #export var fire_powerup_count=4
 #export var extra_life_count=2           #ilosc ulepszen dających dodatkowe życie
@@ -16,10 +15,14 @@ var upgrade_count=0                     #suma ulepszen
 #export var win_powerup_count=3          #ilosc ulepszen dających zwyciestwo
 #export var extra_balls_powerup_count=4  #ilosc ulepszen dające dostep do 2 dodatkowych piłek
 #export var slow_powerup_count=2         #ilosc ulepszen spowalniających piłke
+# warning-ignore:unused_class_variable
 export var level=1                      #obecny poziom gry
 var extra_balls=0                       #ilosc dodatkowych piłek
 var closed=true
 var menu=true
+#var menu_open=false
+var permission=true
+var victory=false
 signal stop                             #sygnały wysyłane do reszty kodu
 signal leaving_stop
 signal move
@@ -64,8 +67,9 @@ func _spawn_ball():
 
 
 func _add_life():
-    life+=1
-    $Hud.update_life(life)
+    if Global.life<5:
+        Global.life+=1
+    $Hud.update_life(Global.life)
 
 
 
@@ -97,11 +101,11 @@ func _leaving():
 #warning-ignore:unused_argument
 #wbudowan funkcja, nadpisana aby sprawdzić czy spacja jest wciśnieta do rozpoczęcia rozgrywki
 func _process(delta):
-    if Input.is_action_pressed("ui_select") and !started:
+    if Input.is_action_pressed("ui_select") and !started and menu and permission:
         new_game()
-    if Input.is_action_just_released("ui_cancel") and menu:
-        $Hud. open_pause_menu()
-
+    elif Input.is_action_just_released("ui_cancel") and menu:
+        $Hud.open_pause_menu()
+    
 
 
 
@@ -145,10 +149,11 @@ func _exit_open_play():
 func _on_Bottom_redo():
     if extra_balls>0:
         extra_balls-=1
+        $Hud.update_life(Global.life)
     else:
-        life-=1
-        $Hud.update_life(life)
-        if life>0:
+        Global.life-=1
+        $Hud.update_life(Global.life)
+        if Global.life>0:
             emit_signal("stop")
             emit_signal("die")
             $Paddle.reset()
@@ -163,13 +168,20 @@ func _on_Bottom_redo():
 func _game_over():
     emit_signal("stop")
     $Hud.show_message("GAME OVER")
+    permission=false
     menu=false
     $EscapeTimer.start()
     
 func stop_movement():
+    permission=false
+    $SpeedUpTimer.stop()
     emit_signal("stop")
+    
 func start_movement():
+    permission=true
+    $SpeedUpTimer.start()
     emit_signal("move")
+    
 func purge_stuff():
     emit_signal("purge")
 
@@ -201,7 +213,10 @@ func _on_HighscorePopup_confirmed():
     var name = $HighscorePopup/LineEdit.get_text()
     if name.length()>0:
         Global.insertScore(name)
-        get_tree().change_scene("res://HighScores.tscn")
+        if victory:
+            get_tree().change_scene("res://EndingScene.tscn")
+        else:
+            get_tree().change_scene("res://HighScores.tscn")
     else:
         $HighscorePopup.set_text("Please, enter your name here:")
 

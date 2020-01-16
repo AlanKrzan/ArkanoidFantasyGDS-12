@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed=200
+export var speed=600
 var velocity=Vector2(0,-speed)
 var on=true
 var living=true
@@ -14,6 +14,7 @@ func _restart_movement():
 func start(pos):
      $AnimatedSprite.play()
      position=pos
+     $AudioStreamPlayer.play()
 
 func _physics_process(delta):
     if on:

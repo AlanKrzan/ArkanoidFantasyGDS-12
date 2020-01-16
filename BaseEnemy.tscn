@@ -41,7 +41,7 @@ z_index = 1
 rect = Rect2( -32, -32, 64, 64 )
 
 [node name="SpawnOverideTimer" type="Timer" parent="."]
-wait_time = 0.21
+wait_time = 0.6
 one_shot = true
 autostart = true
 
@@ -50,7 +50,5 @@ autostart = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "bird"
-frame = 6
-playing = true
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="SpawnOverideTimer" to="." method="_on_SpawnOverideTimer_timeout"]

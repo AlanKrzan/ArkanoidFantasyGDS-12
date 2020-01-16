@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://fonts/Hey Fun.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/RingbearerMedium-w173.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Button.gd" type="Script" id=2]
-[ext_resource path="res://art/laser_bullet.png" type="Texture" id=3]
+[ext_resource path="res://art/ikonka scroll.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 33
@@ -24,8 +24,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -38.019, 17 )
-scale = Vector2( 4, 2.75 )
+position = Vector2( -53.9076, 21.1812 )
 texture = ExtResource( 3 )
 [connection signal="focus_entered" from="." to="." method="_on_PlayButton_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_PlayButton_focus_exited"]

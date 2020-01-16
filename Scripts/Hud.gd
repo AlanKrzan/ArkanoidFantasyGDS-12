@@ -6,7 +6,13 @@ signal move
 signal purge
 #funkcja wypisująca ilość pozostałych żyć
 func update_life(lives):
-    $LifeLabel.text = str(lives)
+    if lives>0:
+        $LifeSprite.position.x=37+23*lives
+        $LifeSprite.set_region_rect(Rect2(0,0,46*lives,32))
+        #$TextureRect.draw_texture_rect_region("res://art/ikonka scroll.png",Rect2(0,0,46*lives,32))
+        $TextureRect.rect_size.x=46*lives
+        
+
     
 #funkcja aktualizująca wypisywany wynik
 func update_score(score):
@@ -51,4 +57,5 @@ func _on_ResumeButton_pressed():
 
 func _on_ExitButton_pressed():
     emit_signal("purge")
+# warning-ignore:return_value_discarded
     get_tree().change_scene("res://MainMenu.tscn")

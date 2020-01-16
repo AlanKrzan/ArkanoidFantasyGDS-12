@@ -2,16 +2,22 @@ extends Node
 #warning-ignore-all:unused_variable
 
 var score=-1
-var life=3
+# warning-ignore:unused_class_variable
+var life=666
+# warning-ignore:unused_class_variable
 var Ball = preload("res://Ball.tscn")   #wczytywanie schematu piłki
+# warning-ignore:unused_class_variable
 var Enemy = preload("res://BaseEnemy.tscn")
-#var Extend = preload("res://ExtendPowerUp.tscn")
-#var Fire = preload("res://FirePowerUp.tscn")
-#var Extra = preload("res://ExtraLifePowerUp.tscn")
-#var Balls = preload("res://ExtraBallPowerUp.tscn")
-#var Sticky = preload("res://StickyPowerUp.tscn")
-#var Win = preload("res://WinPowerUp.tscn")
-#var Slow = preload("res://SlowPowerUp.tscn")
+# warning-ignore:unused_class_variable
+var Scroll = preload("res://art/ikonka scroll.png")
+var LaserOdds=0.3
+var CatchOdds=0.15
+var SlowOdds=0.1
+var ByeOdds=0.05
+var DuplicateOdds=0.15
+var ExtraLifeOdds=0.05
+var ExpandOdds = 0.2
+
 var upgrades={
     "Lasers":preload("res://FirePowerUp.tscn"),
     "Catch":preload("res://StickyPowerUp.tscn"),
@@ -21,6 +27,7 @@ var upgrades={
     "Expand":preload("res://ExtendPowerUp.tscn"),
     "Duplicate":preload("res://ExtraBallPowerUp.tscn")
    }
+# warning-ignore:unused_class_variable
 var Blocks={
     "blue": preload("res://BlueBlock.tscn"), #1
     "cyan": preload("res://CyanBlock.tscn"), #2
@@ -88,6 +95,29 @@ func save_highscores():
     newBest=false
     pass
 
+func check_power():
+    if randf()<=0.1:
+        return true
+    else:
+        return false
+
+func return_power():
+    randomize()
+    var x=randf()
+    if x>=0.7:
+        return upgrades["Lasers"]
+    elif x>=0.55:
+        return upgrades["Catch"]
+    elif x>=0.45:
+        return upgrades["Slow"]
+    elif x>=0.4:
+        return upgrades["Bye"]
+    elif x>=0.25:
+        return upgrades["Duplicate"]
+    elif x>=0.2:
+        return upgrades["Extra-Life"]
+    else:
+        return upgrades["Expand"]
 
 func check_if_score_higher():
     if score>scores[0]['score']:
@@ -100,5 +130,15 @@ func set_bestscore(new_value):
     highscore = new_value
     
 func _ready():
+    var sum=0
+    sum+=LaserOdds
+    sum+=CatchOdds
+    sum+=SlowOdds
+    sum+=ByeOdds
+    sum+=DuplicateOdds
+    sum+=ExtraLifeOdds
+    sum+=ExpandOdds
+    if 1!=sum:
+        print("wrong odds")
     load_highscores()
     highscore = scores[0]['score']

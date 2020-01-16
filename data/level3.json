@@ -1,15 +1,15 @@
 [
 [],
 [],
-["cyan","silver","silver","silver","silver","silver","silver","silver","blue"],
-["","green","","green","","green","","green",""],
-["","gold","gold","gold","gold","gold","gold","gold",""],
-["","","","pink"," ","pink","","",""],
-["cyan","yellow","yellow","silver","silver","silver","yellow","yellow","blue"],
-["","","pink","","pink","","pink","",""],
-["","gold","gold","gold","gold","gold","gold","gold",""],
-["","","","","","","","",""],
-["cyan","red","red","red","red","red","red","red","blue"],
-["cyan","","","","","","","","blue"],
-["gold","gold","gold","silver","silver","silver","gold","gold","gold"]
+["","silver","silver","silver","silver","silver","silver","silver",""],
+["","cyan","cyan","cyan","cyan","cyan","cyan","cyan",""],
+[],
+["","white","white","white","white","white","white","white",""],
+["","silver","silver","silver","silver","silver","silver","silver",""],
+["","green","green","green","green","green","green","green",""],
+[],
+["","orange","orange","orange","orange","orange","orange","orange",""],
+[],
+[],
+["silver","gold","gold","silver","silver","silver","gold","gold","silver"]
 ]

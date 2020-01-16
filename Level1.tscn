@@ -6,7 +6,6 @@
 
 [node name="Paddle" parent="." index="5"]
 self_modulate = Color( 0.666667, 0.160784, 0.160784, 1 )
-paddle_speed = 800
 
 [node name="WinTimer" type="Timer" parent="." index="10"]
 wait_time = 5.0

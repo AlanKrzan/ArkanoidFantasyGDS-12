@@ -34,8 +34,10 @@ func _physics_process(delta):
     if on:
         var collision = move_and_collide(velocity * delta)
         if collision:
-            var oldVelocity=velocity
+            if collision.collider.is_in_group("Gold"):
+                $GoldenBlockHitSound.play()
             if collision.collider.has_method("hit"):
+                $BlockHitSound.play()
                 collision.collider.hit()
             var motion = collision.remainder.bounce(collision.normal)
             if collision.collider.has_method("power_up"):
@@ -50,22 +52,24 @@ func _physics_process(delta):
                         on=false
                         newVelocity = movements[1]
                         $AnimatedSprite.stop()
-                        rotate(-newVelocity.angle_to(oldVelocity))
+                        rotation = fmod(rotation, 2 * PI)
+                        rotate(-newVelocity.angle_to(Vector2(0,1))-rotation+PI)
                     else:
-                        move_and_collide(movements[0]*delta)
+                        collision=move_and_collide(movements[0]*delta)
                         velocity = movements[1]
-                        rotate(-velocity.angle_to(oldVelocity))
+                        rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                 else:
                     velocity = velocity.bounce(collision.normal)
-                    rotate(-velocity.angle_to(oldVelocity))
+                    rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                     collision=move_and_collide(motion)
             else:
                 velocity = velocity.bounce(collision.normal)
-                rotate(-velocity.angle_to(oldVelocity))
+                rotate(-velocity.angle_to(Vector2(0,1))-rotation+PI)
                 collision=move_and_collide(motion)
 
 func _on_VisibilityNotifier2D_screen_exited():
     queue_free()
+    
 
 func _move(how_much):
     position.x = clamp(position.x+how_much, l_margin, r_margin)

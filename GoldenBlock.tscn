@@ -11,6 +11,7 @@ extents = Vector2( 40, 20 )
 
 [node name="GoldenBlock" type="StaticBody2D" groups=[
 "Top",
+"Gold",
 ]]
 collision_layer = 3
 collision_mask = 3
